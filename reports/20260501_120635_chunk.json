@@ -1,0 +1,2882 @@
+{
+    "POWERMART": {
+        "@CREATION_DATE": "09/03/2026 10:00:00",
+        "@REPOSITORY_VERSION": "189.98",
+        "REPOSITORY": {
+            "@NAME": "PCRS_PC_PRD",
+            "@VERSION": "189",
+            "@CODEPAGE": "UTF-8",
+            "@DATABASETYPE": "Oracle",
+            "FOLDER": {
+                "@NAME": "SALES_TO_DW",
+                "@GROUP": "",
+                "@OWNER": "Administrator",
+                "@SHARED": "NOTSHARED",
+                "@DESCRIPTION": "",
+                "@PERMISSIONS": "rwx---r--",
+                "@UUID": "5a8fb14b-f0bg-5fde-9e35-84660bb03908",
+                "SOURCE": {
+                    "@BUSINESSNAME": "",
+                    "@DATABASETYPE": "Oracle",
+                    "@DBDNAME": "zsalespux20",
+                    "@DESCRIPTION": "",
+                    "@NAME": "SALES_ORDER_TAB",
+                    "@OBJECTVERSION": "1",
+                    "@OWNERNAME": "DW2",
+                    "@VERSIONNUMBER": "6",
+                    "SOURCEFIELD": [
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "1",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "PRIMARY KEY",
+                            "@LENGTH": "0",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_ORDER_TYPE",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "0",
+                            "@PHYSICALLENGTH": "20",
+                            "@PHYSICALOFFSET": "0",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "20",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "2",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "PRIMARY KEY",
+                            "@LENGTH": "0",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_CUSTOMER_TYPE",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "0",
+                            "@PHYSICALLENGTH": "1",
+                            "@PHYSICALOFFSET": "20",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "1",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "3",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "PRIMARY KEY",
+                            "@LENGTH": "0",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_CUSTOMER",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "0",
+                            "@PHYSICALLENGTH": "20",
+                            "@PHYSICALOFFSET": "21",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "20",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "4",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@LENGTH": "0",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_CUSTOMER_DESC",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "0",
+                            "@PHYSICALLENGTH": "30",
+                            "@PHYSICALOFFSET": "41",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "30",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "number(p,s)",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "5",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@LENGTH": "12",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_CUSTOMER_REGION",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "0",
+                            "@PHYSICALLENGTH": "10",
+                            "@PHYSICALOFFSET": "71",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "10",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "6",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "PRIMARY KEY",
+                            "@LENGTH": "0",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_DIVISION",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "12",
+                            "@PHYSICALLENGTH": "20",
+                            "@PHYSICALOFFSET": "81",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "20",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "7",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@LENGTH": "0",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_DIVISION_DESC",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "12",
+                            "@PHYSICALLENGTH": "30",
+                            "@PHYSICALOFFSET": "101",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "30",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "8",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "PRIMARY KEY",
+                            "@LENGTH": "0",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_LINE_TYPE",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "12",
+                            "@PHYSICALLENGTH": "1",
+                            "@PHYSICALOFFSET": "131",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "1",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "9",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "PRIMARY KEY",
+                            "@LENGTH": "0",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_LINE_VALUE",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "12",
+                            "@PHYSICALLENGTH": "20",
+                            "@PHYSICALOFFSET": "132",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "20",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "10",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@LENGTH": "0",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_LINE_DESC",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "12",
+                            "@PHYSICALLENGTH": "30",
+                            "@PHYSICALOFFSET": "152",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "30",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "date",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "11",
+                            "@FIELDPROPERTY": "0",
+                            "@FIELDTYPE": "ELEMITEM",
+                            "@HIDDEN": "NO",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@LENGTH": "19",
+                            "@LEVEL": "0",
+                            "@NAME": "SO_ROW_DATE",
+                            "@NULLABLE": "NOTNULL",
+                            "@OCCURS": "0",
+                            "@OFFSET": "12",
+                            "@PHYSICALLENGTH": "19",
+                            "@PHYSICALOFFSET": "182",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "19",
+                            "@SCALE": "0",
+                            "@USAGE_FLAGS": ""
+                        }
+                    ]
+                },
+                "TARGET": {
+                    "@BUSINESSNAME": "",
+                    "@CONSTRAINT": "",
+                    "@DATABASETYPE": "Oracle",
+                    "@DESCRIPTION": "",
+                    "@NAME": "SOD_UNLOAD",
+                    "@OBJECTVERSION": "1",
+                    "@TABLEOPTIONS": "",
+                    "@VERSIONNUMBER": "6",
+                    "TARGETFIELD": [
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "1",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_ORD_TYPE",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "20",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "2",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_CUSTOMER_TYPE",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "1",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "3",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_CUSTOMER",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "20",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "number(p,s)",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "4",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_CUSTOMER_NUMERIC",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "8",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "5",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_CUSTOMER_NAME",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "30",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "number(p,s)",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "6",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_CUSTOMER_REGION",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "10",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "7",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_DIVISION",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "20",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "8",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_DIVISION_NAME",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "30",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "9",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_LINE_TYPE",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "1",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "10",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_LINE_VALUE",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "20",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "varchar2",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "11",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "SO_LINE_DESC",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "30",
+                            "@SCALE": "0"
+                        },
+                        {
+                            "@BUSINESSNAME": "",
+                            "@DATATYPE": "number(p,s)",
+                            "@DESCRIPTION": "",
+                            "@FIELDNUMBER": "12",
+                            "@KEYTYPE": "NOT A KEY",
+                            "@NAME": "OD_TRAN_ID",
+                            "@NULLABLE": "NULL",
+                            "@PICTURETEXT": "",
+                            "@PRECISION": "10",
+                            "@SCALE": "0"
+                        }
+                    ]
+                },
+                "MAPPING": [
+                    {
+                        "@DESCRIPTION": "",
+                        "@ISVALID": "YES",
+                        "@NAME": "m_sod_unload_1",
+                        "@OBJECTVERSION": "1",
+                        "@VERSIONNUMBER": "5",
+                        "TRANSFORMATION": [
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "SQ_SALES_ORDER_TAB",
+                                "@OBJECTVERSION": "1",
+                                "@REUSABLE": "NO",
+                                "@TYPE": "Source Qualifier",
+                                "@VERSIONNUMBER": "5",
+                                "TRANSFORMFIELD": [
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_ORDER_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_CUSTOMER_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "1",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_CUSTOMER",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_CUSTOMER_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_CUSTOMER_REGION",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "10",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_DIVISION",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_DIVISION_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_LINE_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "1",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_LINE_VALUE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_LINE_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "date/time",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_ROW_DATE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "29",
+                                        "@SCALE": "9"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "ORDER_ID",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "10",
+                                        "@SCALE": "0"
+                                    }
+                                ],
+                                "TABLEATTRIBUTE": [
+                                    {
+                                        "@NAME": "Sql Query",
+                                        "@VALUE": "select so_order_type, so_customer_type, so_customer, so_customer_desc,\r\n       so_customer_region, so_division, so_division_desc, so_line_type, \r\n       so_line_value, so_line_desc, od_order_id\r\nfrom sales_order_tab, customers, order_details\r\nwhere so_order_type in ('RETAIL','WHOLESALE')\r\n    and od_cust_nbr > 0\r\n    and od_cust_nbr = cu_nbr\r\n    and ((so_line_type = 'A' and cu_tp_nbr = to_number(so_line_value))\r\n      OR (so_line_type = 'B' and cu_sp_nbr = to_number(so_line_value))\r\n      OR (so_line_type = 'C' and cu_gp_nbr = to_number(so_line_value)))"
+                                    },
+                                    {
+                                        "@NAME": "User Defined Join",
+                                        "@VALUE": ""
+                                    },
+                                    {
+                                        "@NAME": "Source Filter",
+                                        "@VALUE": ""
+                                    },
+                                    {
+                                        "@NAME": "Number Of Sorted Ports",
+                                        "@VALUE": "0"
+                                    },
+                                    {
+                                        "@NAME": "Tracing Level",
+                                        "@VALUE": "Normal"
+                                    },
+                                    {
+                                        "@NAME": "Select Distinct",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Is Partitionable",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Pre SQL",
+                                        "@VALUE": ""
+                                    },
+                                    {
+                                        "@NAME": "Post SQL",
+                                        "@VALUE": ""
+                                    },
+                                    {
+                                        "@NAME": "Output is deterministic",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Output is repeatable",
+                                        "@VALUE": "Never"
+                                    }
+                                ]
+                            },
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "EXPTRANS",
+                                "@OBJECTVERSION": "1",
+                                "@REUSABLE": "NO",
+                                "@TYPE": "Expression",
+                                "@VERSIONNUMBER": "5",
+                                "TRANSFORMFIELD": [
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_CUSTOMER",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_CUSTOMER",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "ERROR('transformation error')",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "IIF(SO_ORDER_TYPE = 'RETAIL',IIF(ISNULL(SO_CUSTOMER),0, To_Decimal(SO_CUSTOMER,0)),0)",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "out_NUMERIC_CUSTOMER",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "OUTPUT",
+                                        "@PRECISION": "8",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_CUSTOMER_REGION",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_CUSTOMER_REGION",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "10",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_DIVISION",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_DIVISION",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_LINE_TYPE",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_LINE_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "1",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_LINE_VALUE",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_LINE_VALUE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "ORDER_ID",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "ORDER_ID",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "10",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_LINE_DESC",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_LINE_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_DIVISION_DESC",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_DIVISION_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_CUSTOMER_DESC",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_CUSTOMER_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_CUSTOMER_TYPE",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_CUSTOMER_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "1",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_ORDER_TYPE",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_ORDER_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    }
+                                ],
+                                "TABLEATTRIBUTE": {
+                                    "@NAME": "Tracing Level",
+                                    "@VALUE": "Normal"
+                                }
+                            }
+                        ],
+                        "INSTANCE": [
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "SOD_UNLOAD",
+                                "@TRANSFORMATION_NAME": "SOD_UNLOAD",
+                                "@TRANSFORMATION_TYPE": "Target Definition",
+                                "@TYPE": "TARGET"
+                            },
+                            {
+                                "@DBDNAME": "zsalespux20",
+                                "@DESCRIPTION": "",
+                                "@NAME": "SALES_ORDER_TAB",
+                                "@TRANSFORMATION_NAME": "SALES_ORDER_TAB",
+                                "@TRANSFORMATION_TYPE": "Source Definition",
+                                "@TYPE": "SOURCE"
+                            },
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "SQ_SALES_ORDER_TAB",
+                                "@REUSABLE": "NO",
+                                "@TRANSFORMATION_NAME": "SQ_SALES_ORDER_TAB",
+                                "@TRANSFORMATION_TYPE": "Source Qualifier",
+                                "@TYPE": "TRANSFORMATION",
+                                "ASSOCIATED_SOURCE_INSTANCE": {
+                                    "@NAME": "SALES_ORDER_TAB"
+                                }
+                            },
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "EXPTRANS",
+                                "@REUSABLE": "NO",
+                                "@TRANSFORMATION_NAME": "EXPTRANS",
+                                "@TRANSFORMATION_TYPE": "Expression",
+                                "@TYPE": "TRANSFORMATION"
+                            }
+                        ],
+                        "CONNECTOR": [
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_TYPE",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER_TYPE",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_DESC",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER_NAME",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION_DESC",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_DIVISION_NAME",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_DESC",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_LINE_DESC",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_REGION",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER_REGION",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_DIVISION",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "out_NUMERIC_CUSTOMER",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER_NUMERIC",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_TYPE",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_LINE_TYPE",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_VALUE",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_LINE_VALUE",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "ORDER_ID",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "OD_TRAN_ID",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_ORDER_TYPE",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_ORD_TYPE",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_ORDER_TYPE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_ORDER_TYPE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_TYPE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_CUSTOMER_TYPE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_CUSTOMER",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_DESC",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_CUSTOMER_DESC",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_REGION",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_CUSTOMER_REGION",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_DIVISION",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION_DESC",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_DIVISION_DESC",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_TYPE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_LINE_TYPE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_VALUE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_LINE_VALUE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_DESC",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_LINE_DESC",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_ROW_DATE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_ROW_DATE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_CUSTOMER",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_REGION",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_CUSTOMER_REGION",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_DIVISION",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_TYPE",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_LINE_TYPE",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_VALUE",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_LINE_VALUE",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "ORDER_ID",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "ORDER_ID",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_DESC",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_LINE_DESC",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION_DESC",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_DIVISION_DESC",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_DESC",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_CUSTOMER_DESC",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_TYPE",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_CUSTOMER_TYPE",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_ORDER_TYPE",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_ORDER_TYPE",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            }
+                        ],
+                        "TARGETLOADORDER": {
+                            "@ORDER": "1",
+                            "@TARGETINSTANCE": "SOD_UNLOAD"
+                        },
+                        "ERPINFO": null
+                    },
+                    {
+                        "@DESCRIPTION": "",
+                        "@ISVALID": "YES",
+                        "@NAME": "m_sod_unload_2",
+                        "@OBJECTVERSION": "1",
+                        "@VERSIONNUMBER": "5",
+                        "TRANSFORMATION": [
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "SQ_SALES_ORDER_TAB",
+                                "@OBJECTVERSION": "1",
+                                "@REUSABLE": "NO",
+                                "@TYPE": "Source Qualifier",
+                                "@VERSIONNUMBER": "5",
+                                "TRANSFORMFIELD": [
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_ORDER_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_CUSTOMER_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "1",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_CUSTOMER",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_CUSTOMER_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_CUSTOMER_REGION",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "10",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_DIVISION",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_DIVISION_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_LINE_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "1",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_LINE_VALUE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_LINE_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "date/time",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "SO_ROW_DATE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "29",
+                                        "@SCALE": "9"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "ORDER_ID",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "10",
+                                        "@SCALE": "0"
+                                    }
+                                ],
+                                "TABLEATTRIBUTE": [
+                                    {
+                                        "@NAME": "Sql Query",
+                                        "@VALUE": "select so_order_type, so_customer_type, so_customer, so_customer_desc,\r\n       so_customer_region, so_division, so_division_desc, so_line_type, \r\n       so_line_value, so_line_desc, od_order_id\r\nfrom sales_order_tab, contracts, order_details\r\nwhere so_order_type in ('RETAIL','WHOLESALE')\r\n    and cn_contract_number = od_cn_contract_number\r\n    and ((so_line_type = 'D' and od_cn_contract_number = to_number(so_line_value))\r\n      OR (so_line_type = 'E' and cn_cr_parent_nbr = to_number(so_line_value))\r\n      OR (so_line_type = 'F' and cn_cg_parent_nbr = to_number(so_line_value)))"
+                                    },
+                                    {
+                                        "@NAME": "User Defined Join",
+                                        "@VALUE": ""
+                                    },
+                                    {
+                                        "@NAME": "Source Filter",
+                                        "@VALUE": ""
+                                    },
+                                    {
+                                        "@NAME": "Number Of Sorted Ports",
+                                        "@VALUE": "0"
+                                    },
+                                    {
+                                        "@NAME": "Tracing Level",
+                                        "@VALUE": "Normal"
+                                    },
+                                    {
+                                        "@NAME": "Select Distinct",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Is Partitionable",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Pre SQL",
+                                        "@VALUE": ""
+                                    },
+                                    {
+                                        "@NAME": "Post SQL",
+                                        "@VALUE": ""
+                                    },
+                                    {
+                                        "@NAME": "Output is deterministic",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Output is repeatable",
+                                        "@VALUE": "Never"
+                                    }
+                                ]
+                            },
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "EXPTRANS",
+                                "@OBJECTVERSION": "1",
+                                "@REUSABLE": "NO",
+                                "@TYPE": "Expression",
+                                "@VERSIONNUMBER": "5",
+                                "TRANSFORMFIELD": [
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_CUSTOMER",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_CUSTOMER",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "ERROR('transformation error')",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "IIF(SO_ORDER_TYPE = 'RETAIL',IIF(ISNULL(SO_CUSTOMER),0, To_Decimal(SO_CUSTOMER,0)),0)",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "out_NUMERIC_CUSTOMER",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "OUTPUT",
+                                        "@PRECISION": "8",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_CUSTOMER_REGION",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_CUSTOMER_REGION",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "10",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_DIVISION",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_DIVISION",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_LINE_TYPE",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_LINE_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "1",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_LINE_VALUE",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_LINE_VALUE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "decimal",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "ORDER_ID",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "ORDER_ID",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "10",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_LINE_DESC",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_LINE_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_DIVISION_DESC",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_DIVISION_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_CUSTOMER_DESC",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_CUSTOMER_DESC",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "30",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_CUSTOMER_TYPE",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_CUSTOMER_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "1",
+                                        "@SCALE": "0"
+                                    },
+                                    {
+                                        "@DATATYPE": "string",
+                                        "@DEFAULTVALUE": "",
+                                        "@DESCRIPTION": "",
+                                        "@EXPRESSION": "SO_ORDER_TYPE",
+                                        "@EXPRESSIONTYPE": "GENERAL",
+                                        "@NAME": "SO_ORDER_TYPE",
+                                        "@PICTURETEXT": "",
+                                        "@PORTTYPE": "INPUT/OUTPUT",
+                                        "@PRECISION": "20",
+                                        "@SCALE": "0"
+                                    }
+                                ],
+                                "TABLEATTRIBUTE": {
+                                    "@NAME": "Tracing Level",
+                                    "@VALUE": "Normal"
+                                }
+                            }
+                        ],
+                        "INSTANCE": [
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "SOD_UNLOAD",
+                                "@TRANSFORMATION_NAME": "SOD_UNLOAD",
+                                "@TRANSFORMATION_TYPE": "Target Definition",
+                                "@TYPE": "TARGET"
+                            },
+                            {
+                                "@DBDNAME": "zsalespux20",
+                                "@DESCRIPTION": "",
+                                "@NAME": "SALES_ORDER_TAB",
+                                "@TRANSFORMATION_NAME": "SALES_ORDER_TAB",
+                                "@TRANSFORMATION_TYPE": "Source Definition",
+                                "@TYPE": "SOURCE"
+                            },
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "SQ_SALES_ORDER_TAB",
+                                "@REUSABLE": "NO",
+                                "@TRANSFORMATION_NAME": "SQ_SALES_ORDER_TAB",
+                                "@TRANSFORMATION_TYPE": "Source Qualifier",
+                                "@TYPE": "TRANSFORMATION",
+                                "ASSOCIATED_SOURCE_INSTANCE": {
+                                    "@NAME": "SALES_ORDER_TAB"
+                                }
+                            },
+                            {
+                                "@DESCRIPTION": "",
+                                "@NAME": "EXPTRANS",
+                                "@REUSABLE": "NO",
+                                "@TRANSFORMATION_NAME": "EXPTRANS",
+                                "@TRANSFORMATION_TYPE": "Expression",
+                                "@TYPE": "TRANSFORMATION"
+                            }
+                        ],
+                        "CONNECTOR": [
+                            {
+                                "@FROMFIELD": "ORDER_ID",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "OD_TRAN_ID",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_ORDER_TYPE",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_ORD_TYPE",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_TYPE",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER_TYPE",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_DESC",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER_NAME",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION_DESC",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_DIVISION_NAME",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_DESC",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_LINE_DESC",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_REGION",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER_REGION",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_DIVISION",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "out_NUMERIC_CUSTOMER",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_CUSTOMER_NUMERIC",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_TYPE",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_LINE_TYPE",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_VALUE",
+                                "@FROMINSTANCE": "EXPTRANS",
+                                "@FROMINSTANCETYPE": "Expression",
+                                "@TOFIELD": "SO_LINE_VALUE",
+                                "@TOINSTANCE": "SOD_UNLOAD",
+                                "@TOINSTANCETYPE": "Target Definition"
+                            },
+                            {
+                                "@FROMFIELD": "SO_ORDER_TYPE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_ORDER_TYPE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_TYPE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_CUSTOMER_TYPE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_CUSTOMER",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_DESC",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_CUSTOMER_DESC",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_REGION",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_CUSTOMER_REGION",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_DIVISION",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION_DESC",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_DIVISION_DESC",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_TYPE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_LINE_TYPE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_VALUE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_LINE_VALUE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_DESC",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_LINE_DESC",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_ROW_DATE",
+                                "@FROMINSTANCE": "SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Definition",
+                                "@TOFIELD": "SO_ROW_DATE",
+                                "@TOINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@TOINSTANCETYPE": "Source Qualifier"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_CUSTOMER",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_REGION",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_CUSTOMER_REGION",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_DIVISION",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_TYPE",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_LINE_TYPE",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_VALUE",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_LINE_VALUE",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "ORDER_ID",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "ORDER_ID",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_LINE_DESC",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_LINE_DESC",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_DIVISION_DESC",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_DIVISION_DESC",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_DESC",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_CUSTOMER_DESC",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_CUSTOMER_TYPE",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_CUSTOMER_TYPE",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            },
+                            {
+                                "@FROMFIELD": "SO_ORDER_TYPE",
+                                "@FROMINSTANCE": "SQ_SALES_ORDER_TAB",
+                                "@FROMINSTANCETYPE": "Source Qualifier",
+                                "@TOFIELD": "SO_ORDER_TYPE",
+                                "@TOINSTANCE": "EXPTRANS",
+                                "@TOINSTANCETYPE": "Expression"
+                            }
+                        ],
+                        "TARGETLOADORDER": {
+                            "@ORDER": "1",
+                            "@TARGETINSTANCE": "SOD_UNLOAD"
+                        },
+                        "ERPINFO": null
+                    }
+                ],
+                "CONFIG": {
+                    "@DESCRIPTION": "Default session configuration object",
+                    "@ISDEFAULT": "YES",
+                    "@NAME": "default_session_config",
+                    "@VERSIONNUMBER": "43",
+                    "ATTRIBUTE": [
+                        {
+                            "@NAME": "Advanced",
+                            "@VALUE": ""
+                        },
+                        {
+                            "@NAME": "Constraint based load ordering",
+                            "@VALUE": "NO"
+                        },
+                        {
+                            "@NAME": "Cache LOOKUP() function",
+                            "@VALUE": "YES"
+                        },
+                        {
+                            "@NAME": "Default buffer block size",
+                            "@VALUE": "64000"
+                        },
+                        {
+                            "@NAME": "Line Sequential buffer length",
+                            "@VALUE": "1024"
+                        },
+                        {
+                            "@NAME": "Maximum Memory Allowed For Auto Memory Attributes",
+                            "@VALUE": "512MB"
+                        },
+                        {
+                            "@NAME": "Maximum Percentage of Total Memory Allowed For Auto Memory Attributes",
+                            "@VALUE": "5"
+                        },
+                        {
+                            "@NAME": "Additional Concurrent Pipelines for Lookup Cache Creation",
+                            "@VALUE": "Auto"
+                        },
+                        {
+                            "@NAME": "Custom Properties",
+                            "@VALUE": ""
+                        },
+                        {
+                            "@NAME": "Pre-build lookup cache",
+                            "@VALUE": "Auto"
+                        },
+                        {
+                            "@NAME": "Optimization Level",
+                            "@VALUE": "Medium"
+                        },
+                        {
+                            "@NAME": "DateTime Format String",
+                            "@VALUE": "MM/DD/YYYY HH24:MI:SS.US"
+                        },
+                        {
+                            "@NAME": "Pre 85 Timestamp Compatibility",
+                            "@VALUE": "NO"
+                        },
+                        {
+                            "@NAME": "Log Options",
+                            "@VALUE": "0"
+                        },
+                        {
+                            "@NAME": "Save session log by",
+                            "@VALUE": "Session runs"
+                        },
+                        {
+                            "@NAME": "Save session log for these runs",
+                            "@VALUE": "7"
+                        },
+                        {
+                            "@NAME": "Session Log File Max Size",
+                            "@VALUE": "0"
+                        },
+                        {
+                            "@NAME": "Session Log File Max Time Period",
+                            "@VALUE": "0"
+                        },
+                        {
+                            "@NAME": "Maximum Partial Session Log Files",
+                            "@VALUE": "1"
+                        },
+                        {
+                            "@NAME": "Stop on errors",
+                            "@VALUE": "0"
+                        },
+                        {
+                            "@NAME": "Override tracing",
+                            "@VALUE": "None"
+                        },
+                        {
+                            "@NAME": "On Stored Procedure error",
+                            "@VALUE": "Stop"
+                        },
+                        {
+                            "@NAME": "On Pre-session command task error",
+                            "@VALUE": "Stop"
+                        },
+                        {
+                            "@NAME": "On Pre-Post SQL error",
+                            "@VALUE": "Stop"
+                        },
+                        {
+                            "@NAME": "Enable Recovery",
+                            "@VALUE": "NO"
+                        },
+                        {
+                            "@NAME": "Error Log Type",
+                            "@VALUE": "None"
+                        },
+                        {
+                            "@NAME": "Error Log File Name",
+                            "@VALUE": "PMError.log"
+                        },
+                        {
+                            "@NAME": "Log Source Row Data",
+                            "@VALUE": "NO"
+                        },
+                        {
+                            "@NAME": "Data Column Delimiter",
+                            "@VALUE": "|"
+                        },
+                        {
+                            "@NAME": "Dynamic Partitioning",
+                            "@VALUE": "Disabled"
+                        },
+                        {
+                            "@NAME": "Number of Partitions",
+                            "@VALUE": "1"
+                        },
+                        {
+                            "@NAME": "Session on Grid",
+                            "@VALUE": ""
+                        },
+                        {
+                            "@NAME": "Is Enabled",
+                            "@VALUE": "NO"
+                        }
+                    ]
+                },
+                "SESSION": [
+                    {
+                        "@DESCRIPTION": "",
+                        "@ISVALID": "YES",
+                        "@MAPPINGNAME": "m_sod_unload_1",
+                        "@NAME": "s_m_sod_unload_1",
+                        "@REUSABLE": "YES",
+                        "@SORTORDER": "Binary",
+                        "@VERSIONNUMBER": "4",
+                        "SESSTRANSFORMATIONINST": [
+                            {
+                                "@ISREPARTITIONPOINT": "YES",
+                                "@PARTITIONTYPE": "PASS THROUGH",
+                                "@PIPELINE": "1",
+                                "@SINSTANCENAME": "SOD_UNLOAD",
+                                "@STAGE": "1",
+                                "@TRANSFORMATIONNAME": "SOD_UNLOAD",
+                                "@TRANSFORMATIONTYPE": "Target Definition",
+                                "FLATFILE": {
+                                    "@CODEPAGE": "MS1252",
+                                    "@CONSECDELIMITERSASONE": "NO",
+                                    "@DELIMITED": "NO",
+                                    "@DELIMITERS": ",",
+                                    "@ESCAPE_CHARACTER": "",
+                                    "@KEEPESCAPECHAR": "NO",
+                                    "@LINESEQUENTIAL": "NO",
+                                    "@MULTIDELIMITERSASAND": "NO",
+                                    "@NULLCHARTYPE": "ASCII",
+                                    "@NULL_CHARACTER": "*",
+                                    "@PADBYTES": "1",
+                                    "@QUOTE_CHARACTER": "NONE",
+                                    "@REPEATABLE": "NO",
+                                    "@ROWDELIMITER": "0",
+                                    "@SKIPROWS": "0",
+                                    "@STRIPTRAILINGBLANKS": "NO"
+                                }
+                            },
+                            {
+                                "@ISREPARTITIONPOINT": "NO",
+                                "@PIPELINE": "0",
+                                "@SINSTANCENAME": "SALES_ORDER_TAB",
+                                "@STAGE": "0",
+                                "@TRANSFORMATIONNAME": "SALES_ORDER_TAB",
+                                "@TRANSFORMATIONTYPE": "Source Definition"
+                            },
+                            {
+                                "@ISREPARTITIONPOINT": "YES",
+                                "@PARTITIONTYPE": "PASS THROUGH",
+                                "@PIPELINE": "1",
+                                "@SINSTANCENAME": "SQ_SALES_ORDER_TAB",
+                                "@STAGE": "2",
+                                "@TRANSFORMATIONNAME": "SQ_SALES_ORDER_TAB",
+                                "@TRANSFORMATIONTYPE": "Source Qualifier",
+                                "ATTRIBUTE": {
+                                    "@NAME": "Sql Query",
+                                    "@VALUE": "select so_order_type, so_customer_type, so_customer, so_customer_desc,\r\n       so_customer_region, so_division, so_division_desc, so_line_type, \r\n       so_line_value, so_line_desc, od_order_id\r\nfrom $$schema.sales_order_tab, $$schema.customers, $$schema.order_details_1\r\nwhere so_order_type in ('RETAIL','WHOLESALE')\r\n    and od_cust_nbr > 0\r\n    and od_cust_nbr = cu_nbr\r\n    and ((so_line_type = 'A' and cu_tp_nbr = to_number(so_line_value))\r\n      OR (so_line_type = 'B' and cu_sp_nbr = to_number(so_line_value))\r\n      OR (so_line_type = 'C' and cu_gp_nbr = to_number(so_line_value)))"
+                                }
+                            },
+                            {
+                                "@ISREPARTITIONPOINT": "NO",
+                                "@PIPELINE": "1",
+                                "@SINSTANCENAME": "EXPTRANS",
+                                "@STAGE": "2",
+                                "@TRANSFORMATIONNAME": "EXPTRANS",
+                                "@TRANSFORMATIONTYPE": "Expression",
+                                "PARTITION": {
+                                    "@DESCRIPTION": "",
+                                    "@NAME": "Partition #1"
+                                }
+                            }
+                        ],
+                        "CONFIGREFERENCE": {
+                            "@REFOBJECTNAME": "default_session_config",
+                            "@TYPE": "Session config",
+                            "ATTRIBUTE": {
+                                "@NAME": "Stop on errors",
+                                "@VALUE": "1"
+                            }
+                        },
+                        "SESSIONEXTENSION": [
+                            {
+                                "@NAME": "File Writer",
+                                "@SINSTANCENAME": "SOD_UNLOAD",
+                                "@SUBTYPE": "File Writer",
+                                "@TRANSFORMATIONTYPE": "Target Definition",
+                                "@TYPE": "WRITER",
+                                "CONNECTIONREFERENCE": {
+                                    "@CNXREFNAME": "Connection",
+                                    "@CONNECTIONNAME": "",
+                                    "@CONNECTIONNUMBER": "1",
+                                    "@CONNECTIONSUBTYPE": "",
+                                    "@CONNECTIONTYPE": "",
+                                    "@VARIABLE": ""
+                                },
+                                "ATTRIBUTE": [
+                                    {
+                                        "@NAME": "Merge Type",
+                                        "@VALUE": "No Merge"
+                                    },
+                                    {
+                                        "@NAME": "Merge File Directory",
+                                        "@VALUE": "$PMTargetFileDir\\"
+                                    },
+                                    {
+                                        "@NAME": "Merge File Name",
+                                        "@VALUE": "sod_unload1.merge"
+                                    },
+                                    {
+                                        "@NAME": "Append if Exists",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Create Target Directory",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Header Options",
+                                        "@VALUE": "No Header"
+                                    },
+                                    {
+                                        "@NAME": "Output Type",
+                                        "@VALUE": "File"
+                                    },
+                                    {
+                                        "@NAME": "Output file directory",
+                                        "@VALUE": "$PMTargetFileDir\\"
+                                    },
+                                    {
+                                        "@NAME": "Output filename",
+                                        "@VALUE": "sod_unload1.out"
+                                    },
+                                    {
+                                        "@NAME": "Reject file directory",
+                                        "@VALUE": "$PMBadFileDir\\"
+                                    },
+                                    {
+                                        "@NAME": "Reject filename",
+                                        "@VALUE": "sod_unload1.bad"
+                                    },
+                                    {
+                                        "@NAME": "Command",
+                                        "@VALUE": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "@DSQINSTNAME": "SQ_SALES_ORDER_TAB",
+                                "@DSQINSTTYPE": "Source Qualifier",
+                                "@NAME": "Relational Reader",
+                                "@SINSTANCENAME": "SALES_ORDER_TAB",
+                                "@SUBTYPE": "Relational Reader",
+                                "@TRANSFORMATIONTYPE": "Source Definition",
+                                "@TYPE": "READER"
+                            },
+                            {
+                                "@NAME": "Relational Reader",
+                                "@SINSTANCENAME": "SQ_SALES_ORDER_TAB",
+                                "@SUBTYPE": "Relational Reader",
+                                "@TRANSFORMATIONTYPE": "Source Qualifier",
+                                "@TYPE": "READER",
+                                "CONNECTIONREFERENCE": {
+                                    "@CNXREFNAME": "DB Connection",
+                                    "@CONNECTIONNAME": "",
+                                    "@CONNECTIONNUMBER": "1",
+                                    "@CONNECTIONSUBTYPE": "",
+                                    "@CONNECTIONTYPE": "Relational",
+                                    "@VARIABLE": "$DBConnectionTGT"
+                                }
+                            }
+                        ],
+                        "ATTRIBUTE": [
+                            {
+                                "@NAME": "Session Log File Name",
+                                "@VALUE": "s_m_sod_unload_1.log"
+                            },
+                            {
+                                "@NAME": "Session Log File directory",
+                                "@VALUE": "$PMSessionLogDir\\"
+                            },
+                            {
+                                "@NAME": "Treat source rows as",
+                                "@VALUE": "Insert"
+                            },
+                            {
+                                "@NAME": "Commit Type",
+                                "@VALUE": "Target"
+                            },
+                            {
+                                "@NAME": "Commit Interval",
+                                "@VALUE": "10000"
+                            },
+                            {
+                                "@NAME": "Commit On End Of File",
+                                "@VALUE": "YES"
+                            },
+                            {
+                                "@NAME": "Rollback Transactions on Errors",
+                                "@VALUE": "NO"
+                            },
+                            {
+                                "@NAME": "Recovery Strategy",
+                                "@VALUE": "Fail task and continue workflow"
+                            },
+                            {
+                                "@NAME": "DTM buffer size",
+                                "@VALUE": "12000000"
+                            },
+                            {
+                                "@NAME": "Collect performance data",
+                                "@VALUE": "NO"
+                            },
+                            {
+                                "@NAME": "Incremental Aggregation",
+                                "@VALUE": "NO"
+                            },
+                            {
+                                "@NAME": "Enable high precision",
+                                "@VALUE": "NO"
+                            },
+                            {
+                                "@NAME": "Pushdown Optimization",
+                                "@VALUE": "None"
+                            }
+                        ]
+                    },
+                    {
+                        "@DESCRIPTION": "",
+                        "@ISVALID": "YES",
+                        "@MAPPINGNAME": "m_sod_unload_2",
+                        "@NAME": "s_m_sod_unload_2",
+                        "@REUSABLE": "YES",
+                        "@SORTORDER": "Binary",
+                        "@VERSIONNUMBER": "4",
+                        "SESSTRANSFORMATIONINST": [
+                            {
+                                "@ISREPARTITIONPOINT": "YES",
+                                "@PARTITIONTYPE": "PASS THROUGH",
+                                "@PIPELINE": "1",
+                                "@SINSTANCENAME": "SOD_UNLOAD",
+                                "@STAGE": "1",
+                                "@TRANSFORMATIONNAME": "SOD_UNLOAD",
+                                "@TRANSFORMATIONTYPE": "Target Definition",
+                                "FLATFILE": {
+                                    "@CODEPAGE": "MS1252",
+                                    "@CONSECDELIMITERSASONE": "NO",
+                                    "@DELIMITED": "NO",
+                                    "@DELIMITERS": ",",
+                                    "@ESCAPE_CHARACTER": "",
+                                    "@KEEPESCAPECHAR": "NO",
+                                    "@LINESEQUENTIAL": "NO",
+                                    "@MULTIDELIMITERSASAND": "NO",
+                                    "@NULLCHARTYPE": "ASCII",
+                                    "@NULL_CHARACTER": "*",
+                                    "@PADBYTES": "1",
+                                    "@QUOTE_CHARACTER": "NONE",
+                                    "@REPEATABLE": "NO",
+                                    "@ROWDELIMITER": "0",
+                                    "@SKIPROWS": "0",
+                                    "@STRIPTRAILINGBLANKS": "NO"
+                                }
+                            },
+                            {
+                                "@ISREPARTITIONPOINT": "NO",
+                                "@PIPELINE": "0",
+                                "@SINSTANCENAME": "SALES_ORDER_TAB",
+                                "@STAGE": "0",
+                                "@TRANSFORMATIONNAME": "SALES_ORDER_TAB",
+                                "@TRANSFORMATIONTYPE": "Source Definition"
+                            },
+                            {
+                                "@ISREPARTITIONPOINT": "YES",
+                                "@PARTITIONTYPE": "PASS THROUGH",
+                                "@PIPELINE": "1",
+                                "@SINSTANCENAME": "SQ_SALES_ORDER_TAB",
+                                "@STAGE": "2",
+                                "@TRANSFORMATIONNAME": "SQ_SALES_ORDER_TAB",
+                                "@TRANSFORMATIONTYPE": "Source Qualifier",
+                                "ATTRIBUTE": {
+                                    "@NAME": "Sql Query",
+                                    "@VALUE": "select so_order_type, so_customer_type, so_customer, so_customer_desc,\r\n       so_customer_region, so_division, so_division_desc, so_line_type, \r\n       so_line_value, so_line_desc, od_order_id\r\nfrom $$schema.sales_order_tab, $$schema.contracts, $$schema.order_details_1\r\nwhere so_order_type in ('RETAIL','WHOLESALE')\r\n    and cn_contract_number = od_cn_contract_number\r\n    and ((so_line_type = 'D' and od_cn_contract_number = to_number(so_line_value))\r\n      OR (so_line_type = 'E' and cn_cr_parent_nbr = to_number(so_line_value))\r\n      OR (so_line_type = 'F' and cn_cg_parent_nbr = to_number(so_line_value)))"
+                                }
+                            },
+                            {
+                                "@ISREPARTITIONPOINT": "NO",
+                                "@PIPELINE": "1",
+                                "@SINSTANCENAME": "EXPTRANS",
+                                "@STAGE": "2",
+                                "@TRANSFORMATIONNAME": "EXPTRANS",
+                                "@TRANSFORMATIONTYPE": "Expression",
+                                "PARTITION": {
+                                    "@DESCRIPTION": "",
+                                    "@NAME": "Partition #1"
+                                }
+                            }
+                        ],
+                        "CONFIGREFERENCE": {
+                            "@REFOBJECTNAME": "default_session_config",
+                            "@TYPE": "Session config",
+                            "ATTRIBUTE": {
+                                "@NAME": "Stop on errors",
+                                "@VALUE": "1"
+                            }
+                        },
+                        "SESSIONEXTENSION": [
+                            {
+                                "@NAME": "File Writer",
+                                "@SINSTANCENAME": "SOD_UNLOAD",
+                                "@SUBTYPE": "File Writer",
+                                "@TRANSFORMATIONTYPE": "Target Definition",
+                                "@TYPE": "WRITER",
+                                "CONNECTIONREFERENCE": {
+                                    "@CNXREFNAME": "Connection",
+                                    "@CONNECTIONNAME": "",
+                                    "@CONNECTIONNUMBER": "1",
+                                    "@CONNECTIONSUBTYPE": "",
+                                    "@CONNECTIONTYPE": "",
+                                    "@VARIABLE": ""
+                                },
+                                "ATTRIBUTE": [
+                                    {
+                                        "@NAME": "Merge Type",
+                                        "@VALUE": "No Merge"
+                                    },
+                                    {
+                                        "@NAME": "Merge File Directory",
+                                        "@VALUE": "$PMTargetFileDir\\"
+                                    },
+                                    {
+                                        "@NAME": "Merge File Name",
+                                        "@VALUE": "sod_unload2.merge"
+                                    },
+                                    {
+                                        "@NAME": "Append if Exists",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Create Target Directory",
+                                        "@VALUE": "NO"
+                                    },
+                                    {
+                                        "@NAME": "Header Options",
+                                        "@VALUE": "No Header"
+                                    },
+                                    {
+                                        "@NAME": "Output Type",
+                                        "@VALUE": "File"
+                                    },
+                                    {
+                                        "@NAME": "Output file directory",
+                                        "@VALUE": "$PMTargetFileDir\\"
+                                    },
+                                    {
+                                        "@NAME": "Output filename",
+                                        "@VALUE": "sod_unload2.out"
+                                    },
+                                    {
+                                        "@NAME": "Reject file directory",
+                                        "@VALUE": "$PMBadFileDir\\"
+                                    },
+                                    {
+                                        "@NAME": "Reject filename",
+                                        "@VALUE": "sod_unload2.bad"
+                                    },
+                                    {
+                                        "@NAME": "Command",
+                                        "@VALUE": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "@DSQINSTNAME": "SQ_SALES_ORDER_TAB",
+                                "@DSQINSTTYPE": "Source Qualifier",
+                                "@NAME": "Relational Reader",
+                                "@SINSTANCENAME": "SALES_ORDER_TAB",
+                                "@SUBTYPE": "Relational Reader",
+                                "@TRANSFORMATIONTYPE": "Source Definition",
+                                "@TYPE": "READER"
+                            },
+                            {
+                                "@NAME": "Relational Reader",
+                                "@SINSTANCENAME": "SQ_SALES_ORDER_TAB",
+                                "@SUBTYPE": "Relational Reader",
+                                "@TRANSFORMATIONTYPE": "Source Qualifier",
+                                "@TYPE": "READER",
+                                "CONNECTIONREFERENCE": {
+                                    "@CNXREFNAME": "DB Connection",
+                                    "@CONNECTIONNAME": "",
+                                    "@CONNECTIONNUMBER": "1",
+                                    "@CONNECTIONSUBTYPE": "",
+                                    "@CONNECTIONTYPE": "Relational",
+                                    "@VARIABLE": "$DBConnectionTGT"
+                                }
+                            }
+                        ],
+                        "ATTRIBUTE": [
+                            {
+                                "@NAME": "Session Log File Name",
+                                "@VALUE": "s_m_sod_unload_2.log"
+                            },
+                            {
+                                "@NAME": "Session Log File directory",
+                                "@VALUE": "$PMSessionLogDir\\"
+                            },
+                            {
+                                "@NAME": "Treat source rows as",
+                                "@VALUE": "Insert"
+                            },
+                            {
+                                "@NAME": "Commit Type",
+                                "@VALUE": "Target"
+                            },
+                            {
+                                "@NAME": "Commit Interval",
+                                "@VALUE": "10000"
+                            },
+                            {
+                                "@NAME": "Commit On End Of File",
+                                "@VALUE": "YES"
+                            },
+                            {
+                                "@NAME": "Rollback Transactions on Errors",
+                                "@VALUE": "NO"
+                            },
+                            {
+                                "@NAME": "Recovery Strategy",
+                                "@VALUE": "Fail task and continue workflow"
+                            },
+                            {
+                                "@NAME": "DTM buffer size",
+                                "@VALUE": "12000000"
+                            },
+                            {
+                                "@NAME": "Collect performance data",
+                                "@VALUE": "NO"
+                            },
+                            {
+                                "@NAME": "Incremental Aggregation",
+                                "@VALUE": "NO"
+                            },
+                            {
+                                "@NAME": "Enable high precision",
+                                "@VALUE": "NO"
+                            },
+                            {
+                                "@NAME": "Pushdown Optimization",
+                                "@VALUE": "None"
+                            }
+                        ]
+                    }
+                ],
+                "TASK": [
+                    {
+                        "@DESCRIPTION": "",
+                        "@NAME": "cmd_sales_log",
+                        "@REUSABLE": "YES",
+                        "@TYPE": "Command",
+                        "@VERSIONNUMBER": "5",
+                        "ATTRIBUTE": [
+                            {
+                                "@NAME": "Fail task if any command fails",
+                                "@VALUE": "NO"
+                            },
+                            {
+                                "@NAME": "Recovery Strategy",
+                                "@VALUE": "Fail task and continue workflow"
+                            }
+                        ],
+                        "VALUEPAIR": {
+                            "@EXECORDER": "1",
+                            "@NAME": "Command1",
+                            "@REVERSEASSIGNMENT": "NO",
+                            "@VALUE": "sh /data/infa_shared/SALES/scripts/sales_logs.sh > /data/infa_shared/SALES/log/sales_logs.sh.log"
+                        }
+                    },
+                    {
+                        "@DESCRIPTION": "",
+                        "@NAME": "On_failure_SalesEmail",
+                        "@REUSABLE": "YES",
+                        "@TYPE": "Email",
+                        "@VERSIONNUMBER": "9",
+                        "ATTRIBUTE": [
+                            {
+                                "@NAME": "Email User Name",
+                                "@VALUE": "SalesITDataAnalyticsTCSl2Support@sales.com,sales@service-now.com"
+                            },
+                            {
+                                "@NAME": "Email Subject",
+                                "@VALUE": "$PMWorkflowName -P3 ETL Workflow Failed"
+                            },
+                            {
+                                "@NAME": "Email Text",
+                                "@VALUE": "Folder Name : $PMFolderName\r\nWorkflow Name : $PMWorkflowName\r\n\r\nPlease check the workflow or session log and recover the job"
+                            }
+                        ]
+                    }
+                ],
+                "WORKFLOW": {
+                    "@DESCRIPTION": "",
+                    "@ISENABLED": "YES",
+                    "@ISRUNNABLESERVICE": "NO",
+                    "@ISSERVICE": "NO",
+                    "@ISVALID": "YES",
+                    "@NAME": "wf_sod_unload",
+                    "@REUSABLE_SCHEDULER": "NO",
+                    "@SCHEDULERNAME": "Scheduler",
+                    "@SERVERNAME": "PIS_PC_PRD",
+                    "@SERVER_DOMAINNAME": "DOM_SALES_PRD",
+                    "@SUSPEND_ON_ERROR": "YES",
+                    "@SUSPENSION_EMAIL": "On_failure_SalesEmail",
+                    "@TASKS_MUST_RUN_ON_SERVER": "NO",
+                    "@VERSIONNUMBER": "7",
+                    "SCHEDULER": {
+                        "@DESCRIPTION": "",
+                        "@NAME": "Scheduler",
+                        "@REUSABLE": "NO",
+                        "@VERSIONNUMBER": "4",
+                        "SCHEDULEINFO": {
+                            "@SCHEDULETYPE": "ONDEMAND"
+                        }
+                    },
+                    "TASK": {
+                        "@DESCRIPTION": "",
+                        "@NAME": "Start",
+                        "@REUSABLE": "NO",
+                        "@TYPE": "Start",
+                        "@VERSIONNUMBER": "4"
+                    },
+                    "SESSION": [
+                        {
+                            "@DESCRIPTION": "",
+                            "@ISVALID": "YES",
+                            "@MAPPINGNAME": "m_sod_unload_1",
+                            "@NAME": "s_m_sod_unload_1_wf",
+                            "@REUSABLE": "NO",
+                            "@SORTORDER": "Binary",
+                            "@VERSIONNUMBER": "5",
+                            "SESSTRANSFORMATIONINST": [
+                                {
+                                    "@ISREPARTITIONPOINT": "YES",
+                                    "@PARTITIONTYPE": "PASS THROUGH",
+                                    "@PIPELINE": "1",
+                                    "@SINSTANCENAME": "SOD_UNLOAD",
+                                    "@STAGE": "1",
+                                    "@TRANSFORMATIONNAME": "SOD_UNLOAD",
+                                    "@TRANSFORMATIONTYPE": "Target Definition",
+                                    "FLATFILE": {
+                                        "@CODEPAGE": "MS1252",
+                                        "@CONSECDELIMITERSASONE": "NO",
+                                        "@DELIMITED": "NO",
+                                        "@DELIMITERS": ",",
+                                        "@LINESEQUENTIAL": "NO",
+                                        "@NULLCHARTYPE": "ASCII",
+                                        "@NULL_CHARACTER": "*",
+                                        "@PADBYTES": "1",
+                                        "@QUOTE_CHARACTER": "NONE",
+                                        "@REPEATABLE": "NO",
+                                        "@ROWDELIMITER": "0",
+                                        "@SKIPROWS": "0",
+                                        "@STRIPTRAILINGBLANKS": "NO"
+                                    }
+                                },
+                                {
+                                    "@ISREPARTITIONPOINT": "NO",
+                                    "@PIPELINE": "0",
+                                    "@SINSTANCENAME": "SALES_ORDER_TAB",
+                                    "@STAGE": "0",
+                                    "@TRANSFORMATIONNAME": "SALES_ORDER_TAB",
+                                    "@TRANSFORMATIONTYPE": "Source Definition"
+                                },
+                                {
+                                    "@ISREPARTITIONPOINT": "YES",
+                                    "@PARTITIONTYPE": "PASS THROUGH",
+                                    "@PIPELINE": "1",
+                                    "@SINSTANCENAME": "SQ_SALES_ORDER_TAB",
+                                    "@STAGE": "2",
+                                    "@TRANSFORMATIONNAME": "SQ_SALES_ORDER_TAB",
+                                    "@TRANSFORMATIONTYPE": "Source Qualifier",
+                                    "ATTRIBUTE": {
+                                        "@NAME": "Sql Query",
+                                        "@VALUE": "select so_order_type, so_customer_type, so_customer, so_customer_desc,\r\n       so_customer_region, so_division, so_division_desc, so_line_type, \r\n       so_line_value, so_line_desc, od_order_id\r\nfrom $$schema.sales_order_tab, $$schema.order_details_1\r\nwhere so_order_type in ('RETAIL','WHOLESALE')\r\nand (so_line_type = 'A' and od_cust_id = to_number(so_line_value))"
+                                    }
+                                },
+                                {
+                                    "@ISREPARTITIONPOINT": "NO",
+                                    "@PIPELINE": "1",
+                                    "@SINSTANCENAME": "EXPTRANS",
+                                    "@STAGE": "2",
+                                    "@TRANSFORMATIONNAME": "EXPTRANS",
+                                    "@TRANSFORMATIONTYPE": "Expression",
+                                    "PARTITION": {
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "Partition #1"
+                                    }
+                                }
+                            ],
+                            "CONFIGREFERENCE": {
+                                "@REFOBJECTNAME": "default_session_config",
+                                "@TYPE": "Session config",
+                                "ATTRIBUTE": {
+                                    "@NAME": "Stop on errors",
+                                    "@VALUE": "1"
+                                }
+                            },
+                            "SESSIONCOMPONENT": [
+                                {
+                                    "@REFOBJECTNAME": "cmd_sales_log",
+                                    "@REUSABLE": "YES",
+                                    "@TYPE": "Post-session success command"
+                                },
+                                {
+                                    "@REFOBJECTNAME": "cmd_sales_log",
+                                    "@REUSABLE": "YES",
+                                    "@TYPE": "Post-session failure command"
+                                }
+                            ],
+                            "SESSIONEXTENSION": [
+                                {
+                                    "@NAME": "File Writer",
+                                    "@SINSTANCENAME": "SOD_UNLOAD",
+                                    "@SUBTYPE": "File Writer",
+                                    "@TRANSFORMATIONTYPE": "Target Definition",
+                                    "@TYPE": "WRITER",
+                                    "CONNECTIONREFERENCE": {
+                                        "@CNXREFNAME": "Connection",
+                                        "@CONNECTIONNAME": "",
+                                        "@CONNECTIONNUMBER": "1",
+                                        "@CONNECTIONSUBTYPE": "",
+                                        "@CONNECTIONTYPE": "",
+                                        "@VARIABLE": ""
+                                    },
+                                    "ATTRIBUTE": [
+                                        {
+                                            "@NAME": "Output file directory",
+                                            "@VALUE": "$$PMTgtfileDir"
+                                        },
+                                        {
+                                            "@NAME": "Output filename",
+                                            "@VALUE": "sod_unload1.out"
+                                        },
+                                        {
+                                            "@NAME": "Reject file directory",
+                                            "@VALUE": "$PMBadFileDir\\"
+                                        },
+                                        {
+                                            "@NAME": "Reject filename",
+                                            "@VALUE": "sod_unload1.bad"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@NAME": "Relational Reader",
+                                    "@SINSTANCENAME": "SQ_SALES_ORDER_TAB",
+                                    "@SUBTYPE": "Relational Reader",
+                                    "@TRANSFORMATIONTYPE": "Source Qualifier",
+                                    "@TYPE": "READER",
+                                    "CONNECTIONREFERENCE": {
+                                        "@CNXREFNAME": "DB Connection",
+                                        "@CONNECTIONNAME": "",
+                                        "@CONNECTIONNUMBER": "1",
+                                        "@CONNECTIONSUBTYPE": "",
+                                        "@CONNECTIONTYPE": "Relational",
+                                        "@VARIABLE": "$DBConnectionTGT"
+                                    }
+                                }
+                            ],
+                            "ATTRIBUTE": [
+                                {
+                                    "@NAME": "Session Log File Name",
+                                    "@VALUE": "s_m_sod_unload_1.log"
+                                },
+                                {
+                                    "@NAME": "Session Log File directory",
+                                    "@VALUE": "$PMSessionLogDir\\"
+                                },
+                                {
+                                    "@NAME": "Treat source rows as",
+                                    "@VALUE": "Insert"
+                                },
+                                {
+                                    "@NAME": "Commit Type",
+                                    "@VALUE": "Target"
+                                },
+                                {
+                                    "@NAME": "Commit Interval",
+                                    "@VALUE": "10000"
+                                },
+                                {
+                                    "@NAME": "Commit On End Of File",
+                                    "@VALUE": "YES"
+                                },
+                                {
+                                    "@NAME": "Rollback Transactions on Errors",
+                                    "@VALUE": "NO"
+                                },
+                                {
+                                    "@NAME": "Recovery Strategy",
+                                    "@VALUE": "Fail task and continue workflow"
+                                },
+                                {
+                                    "@NAME": "DTM buffer size",
+                                    "@VALUE": "12000000"
+                                },
+                                {
+                                    "@NAME": "Pushdown Optimization",
+                                    "@VALUE": "None"
+                                }
+                            ]
+                        },
+                        {
+                            "@DESCRIPTION": "",
+                            "@ISVALID": "YES",
+                            "@MAPPINGNAME": "m_sod_unload_2",
+                            "@NAME": "s_m_sod_unload_2_wf",
+                            "@REUSABLE": "NO",
+                            "@SORTORDER": "Binary",
+                            "@VERSIONNUMBER": "5",
+                            "SESSTRANSFORMATIONINST": [
+                                {
+                                    "@ISREPARTITIONPOINT": "YES",
+                                    "@PARTITIONTYPE": "PASS THROUGH",
+                                    "@PIPELINE": "1",
+                                    "@SINSTANCENAME": "SOD_UNLOAD",
+                                    "@STAGE": "1",
+                                    "@TRANSFORMATIONNAME": "SOD_UNLOAD",
+                                    "@TRANSFORMATIONTYPE": "Target Definition",
+                                    "FLATFILE": {
+                                        "@CODEPAGE": "MS1252",
+                                        "@CONSECDELIMITERSASONE": "NO",
+                                        "@DELIMITED": "NO",
+                                        "@DELIMITERS": ",",
+                                        "@LINESEQUENTIAL": "NO",
+                                        "@NULLCHARTYPE": "ASCII",
+                                        "@NULL_CHARACTER": "*",
+                                        "@PADBYTES": "1",
+                                        "@QUOTE_CHARACTER": "NONE",
+                                        "@REPEATABLE": "NO",
+                                        "@ROWDELIMITER": "0",
+                                        "@SKIPROWS": "0",
+                                        "@STRIPTRAILINGBLANKS": "NO"
+                                    }
+                                },
+                                {
+                                    "@ISREPARTITIONPOINT": "NO",
+                                    "@PIPELINE": "0",
+                                    "@SINSTANCENAME": "SALES_ORDER_TAB",
+                                    "@STAGE": "0",
+                                    "@TRANSFORMATIONNAME": "SALES_ORDER_TAB",
+                                    "@TRANSFORMATIONTYPE": "Source Definition"
+                                },
+                                {
+                                    "@ISREPARTITIONPOINT": "YES",
+                                    "@PARTITIONTYPE": "PASS THROUGH",
+                                    "@PIPELINE": "1",
+                                    "@SINSTANCENAME": "SQ_SALES_ORDER_TAB",
+                                    "@STAGE": "2",
+                                    "@TRANSFORMATIONNAME": "SQ_SALES_ORDER_TAB",
+                                    "@TRANSFORMATIONTYPE": "Source Qualifier",
+                                    "ATTRIBUTE": {
+                                        "@NAME": "Sql Query",
+                                        "@VALUE": "select so_order_type, so_customer_type, so_customer, so_customer_desc,\r\n       so_customer_region, so_division, so_division_desc, so_line_type, \r\n       so_line_value, so_line_desc, od_order_id\r\nfrom $$schema.sales_order_tab, $$schema.contracts, $$schema.order_details_1\r\nwhere so_order_type in ('RETAIL','WHOLESALE')\r\n    and cn_contract_number = od_cn_contract_number\r\n    and ((so_line_type = 'D' and od_cn_contract_number = to_number(so_line_value))\r\n      OR (so_line_type = 'E' and cn_cr_parent_nbr = to_number(so_line_value)))"
+                                    }
+                                },
+                                {
+                                    "@ISREPARTITIONPOINT": "NO",
+                                    "@PIPELINE": "1",
+                                    "@SINSTANCENAME": "EXPTRANS",
+                                    "@STAGE": "2",
+                                    "@TRANSFORMATIONNAME": "EXPTRANS",
+                                    "@TRANSFORMATIONTYPE": "Expression",
+                                    "PARTITION": {
+                                        "@DESCRIPTION": "",
+                                        "@NAME": "Partition #1"
+                                    }
+                                }
+                            ],
+                            "CONFIGREFERENCE": {
+                                "@REFOBJECTNAME": "default_session_config",
+                                "@TYPE": "Session config",
+                                "ATTRIBUTE": {
+                                    "@NAME": "Stop on errors",
+                                    "@VALUE": "1"
+                                }
+                            },
+                            "SESSIONCOMPONENT": [
+                                {
+                                    "@REFOBJECTNAME": "cmd_sales_log",
+                                    "@REUSABLE": "YES",
+                                    "@TYPE": "Post-session success command"
+                                },
+                                {
+                                    "@REFOBJECTNAME": "cmd_sales_log",
+                                    "@REUSABLE": "YES",
+                                    "@TYPE": "Post-session failure command"
+                                }
+                            ],
+                            "SESSIONEXTENSION": [
+                                {
+                                    "@NAME": "File Writer",
+                                    "@SINSTANCENAME": "SOD_UNLOAD",
+                                    "@SUBTYPE": "File Writer",
+                                    "@TRANSFORMATIONTYPE": "Target Definition",
+                                    "@TYPE": "WRITER",
+                                    "CONNECTIONREFERENCE": {
+                                        "@CNXREFNAME": "Connection",
+                                        "@CONNECTIONNAME": "",
+                                        "@CONNECTIONNUMBER": "1",
+                                        "@CONNECTIONSUBTYPE": "",
+                                        "@CONNECTIONTYPE": "",
+                                        "@VARIABLE": ""
+                                    },
+                                    "ATTRIBUTE": [
+                                        {
+                                            "@NAME": "Output file directory",
+                                            "@VALUE": "$$PMTgtfileDir"
+                                        },
+                                        {
+                                            "@NAME": "Output filename",
+                                            "@VALUE": "sod_unload2.out"
+                                        },
+                                        {
+                                            "@NAME": "Reject file directory",
+                                            "@VALUE": "$PMBadFileDir\\"
+                                        },
+                                        {
+                                            "@NAME": "Reject filename",
+                                            "@VALUE": "sod_unload2.bad"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "@NAME": "Relational Reader",
+                                    "@SINSTANCENAME": "SQ_SALES_ORDER_TAB",
+                                    "@SUBTYPE": "Relational Reader",
+                                    "@TRANSFORMATIONTYPE": "Source Qualifier",
+                                    "@TYPE": "READER",
+                                    "CONNECTIONREFERENCE": {
+                                        "@CNXREFNAME": "DB Connection",
+                                        "@CONNECTIONNAME": "",
+                                        "@CONNECTIONNUMBER": "1",
+                                        "@CONNECTIONSUBTYPE": "",
+                                        "@CONNECTIONTYPE": "Relational",
+                                        "@VARIABLE": "$DBConnectionTGT"
+                                    }
+                                }
+                            ],
+                            "ATTRIBUTE": [
+                                {
+                                    "@NAME": "Session Log File Name",
+                                    "@VALUE": "s_m_sod_unload_2.log"
+                                },
+                                {
+                                    "@NAME": "Session Log File directory",
+                                    "@VALUE": "$PMSessionLogDir\\"
+                                },
+                                {
+                                    "@NAME": "Treat source rows as",
+                                    "@VALUE": "Insert"
+                                },
+                                {
+                                    "@NAME": "Commit Type",
+                                    "@VALUE": "Target"
+                                },
+                                {
+                                    "@NAME": "Commit Interval",
+                                    "@VALUE": "10000"
+                                },
+                                {
+                                    "@NAME": "Commit On End Of File",
+                                    "@VALUE": "YES"
+                                },
+                                {
+                                    "@NAME": "Rollback Transactions on Errors",
+                                    "@VALUE": "NO"
+                                },
+                                {
+                                    "@NAME": "Recovery Strategy",
+                                    "@VALUE": "Fail task and continue workflow"
+                                },
+                                {
+                                    "@NAME": "DTM buffer size",
+                                    "@VALUE": "12000000"
+                                },
+                                {
+                                    "@NAME": "Pushdown Optimization",
+                                    "@VALUE": "None"
+                                }
+                            ]
+                        }
+                    ],
+                    "TASKINSTANCE": [
+                        {
+                            "@DESCRIPTION": "",
+                            "@ISENABLED": "YES",
+                            "@NAME": "Start",
+                            "@REUSABLE": "NO",
+                            "@TASKNAME": "Start",
+                            "@TASKTYPE": "Start"
+                        },
+                        {
+                            "@DESCRIPTION": "",
+                            "@FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN": "YES",
+                            "@FAIL_PARENT_IF_INSTANCE_FAILS": "YES",
+                            "@ISENABLED": "YES",
+                            "@NAME": "s_m_sod_unload_1_wf",
+                            "@REUSABLE": "NO",
+                            "@TASKNAME": "s_m_sod_unload_1_wf",
+                            "@TASKTYPE": "Session",
+                            "@TREAT_INPUTLINK_AS_AND": "YES"
+                        },
+                        {
+                            "@DESCRIPTION": "",
+                            "@FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN": "YES",
+                            "@FAIL_PARENT_IF_INSTANCE_FAILS": "YES",
+                            "@ISENABLED": "YES",
+                            "@NAME": "s_m_sod_unload_2_wf",
+                            "@REUSABLE": "NO",
+                            "@TASKNAME": "s_m_sod_unload_2_wf",
+                            "@TASKTYPE": "Session",
+                            "@TREAT_INPUTLINK_AS_AND": "YES"
+                        }
+                    ],
+                    "WORKFLOWLINK": [
+                        {
+                            "@CONDITION": "$Start.PrevTaskStatus = SUCCEEDED AND $$passInStatus != DISABLED",
+                            "@FROMTASK": "Start",
+                            "@TOTASK": "s_m_sod_unload_1_wf"
+                        },
+                        {
+                            "@CONDITION": "$Start.PrevTaskStatus = SUCCEEDED AND $$passInStatus != DISABLED",
+                            "@FROMTASK": "s_m_sod_unload_1_wf",
+                            "@TOTASK": "s_m_sod_unload_2_wf"
+                        }
+                    ],
+                    "WORKFLOWVARIABLE": [
+                        {
+                            "@DATATYPE": "integer",
+                            "@DEFAULTVALUE": "0",
+                            "@DESCRIPTION": "Created by the RU4 upgrade.",
+                            "@ISNULL": "NO",
+                            "@ISPERSISTENT": "NO",
+                            "@NAME": "$$passInStatus",
+                            "@USERDEFINED": "YES"
+                        },
+                        {
+                            "@DATATYPE": "nstring",
+                            "@DEFAULTVALUE": "",
+                            "@DESCRIPTION": "",
+                            "@ISNULL": "NO",
+                            "@ISPERSISTENT": "NO",
+                            "@NAME": "$$PMTgtfileDir",
+                            "@USERDEFINED": "YES"
+                        },
+                        {
+                            "@DATATYPE": "nstring",
+                            "@DEFAULTVALUE": "",
+                            "@DESCRIPTION": "",
+                            "@ISNULL": "NO",
+                            "@ISPERSISTENT": "NO",
+                            "@NAME": "$$schema",
+                            "@USERDEFINED": "YES"
+                        }
+                    ],
+                    "ATTRIBUTE": [
+                        {
+                            "@NAME": "Parameter Filename",
+                            "@VALUE": "\\data\\infa_shared\\SALES\\parms\\SALES_TO_DW.parm"
+                        },
+                        {
+                            "@NAME": "Workflow Log File Name",
+                            "@VALUE": "wf_sod_unload.log"
+                        },
+                        {
+                            "@NAME": "Workflow Log File Directory",
+                            "@VALUE": "$PMWorkflowLogDir\\"
+                        },
+                        {
+                            "@NAME": "Save Workflow log by",
+                            "@VALUE": "By runs"
+                        },
+                        {
+                            "@NAME": "Save workflow log for these runs",
+                            "@VALUE": "0"
+                        },
+                        {
+                            "@NAME": "Enable HA recovery",
+                            "@VALUE": "NO"
+                        },
+                        {
+                            "@NAME": "Service Level Name",
+                            "@VALUE": "Default"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

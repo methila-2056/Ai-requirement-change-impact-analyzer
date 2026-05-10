@@ -1,0 +1,50 @@
+============================================================
+   STRATEGIC REQUIREMENT CHANGE IMPACT ANALYSIS REPORT
+============================================================
+  Generated     : 2026-05-10 11:10:07
+  Source File   : wf_brs_unload.xml
+
+┌─────────────────────────────────────────────┐
+│  RISK LEVEL     :             HIGH           │
+│  RISK SCORE     :              43            │
+│  COMPONENTS HIT :              23            │
+└─────────────────────────────────────────────┘
+
+AFFECTED COMPONENTS
+--------------------------------------------------
+  [HIGH]  Source System                       | +2d / 16h
+  [HIGH]  Target System                       | +3d / 24h
+  [MED ]  Transformation Logic                | +2d / 16h
+  [HIGH]  Lookup Component                    | +2d / 16h
+  [MED ]  Join Logic                          | +1d / 8h
+  [MED ]  ETL Mapping                         | +2d / 16h
+  [MED ]  Workflow / Job Schedule             | +1d / 8h
+  [LOW ]  Session Config                      | +1d / 4h
+  [MED ]  Expression / Formula                | +1d / 8h
+  [LOW ]  Filter Condition                    | +1d / 4h
+  [LOW ]  Sequence Generator                  | +1d / 4h
+  [LOW ]  Schema / Column Definition          | +1d / 4h
+  [HIGH]  Data Schema                         | +2d / 16h
+  [HIGH]  Data Pipeline                       | +3d / 24h
+  [MED ]  Connector / Connection              | +1d / 8h
+  [MED ]  Repository / Metadata               | +1d / 8h
+  [MED ]  Table Definition                    | +1d / 8h
+  [MED ]  Key / Index                         | +1d / 8h
+  [MED ]  Data Constraint                     | +1d / 8h
+  [LOW ]  Cache Layer                         | +1d / 4h
+  [LOW ]  Logging / Audit                     | +1d / 4h
+  [LOW ]  Configuration                       | +1d / 4h
+  [LOW ]  Parameter / Variable                | +1d / 4h
+
+EFFORT ESTIMATION
+--------------------------------------------------
+  Total Effort          : 32 working days  (224 man-hours)
+  Fast Delivery (2 devs): 16 working days
+
+CLIENT COMMUNICATION NOTE
+--------------------------------------------------
+  ⚠️ This change has HIGH risk. Multiple critical components are affected. Regression testing is mandatory before deployment.
+
+============================================================
+  END OF REPORT
+============================================================

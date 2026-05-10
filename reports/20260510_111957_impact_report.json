@@ -1,0 +1,158 @@
+{
+    "components": [
+        {
+            "name": "Source System",
+            "keyword": "SOURCE",
+            "risk": 3,
+            "effort_days": 2,
+            "effort_hrs": 16
+        },
+        {
+            "name": "Target System",
+            "keyword": "TARGET",
+            "risk": 3,
+            "effort_days": 3,
+            "effort_hrs": 24
+        },
+        {
+            "name": "Transformation Logic",
+            "keyword": "TRANSFORMATION",
+            "risk": 2,
+            "effort_days": 2,
+            "effort_hrs": 16
+        },
+        {
+            "name": "Lookup Component",
+            "keyword": "LOOKUP",
+            "risk": 3,
+            "effort_days": 2,
+            "effort_hrs": 16
+        },
+        {
+            "name": "Join Logic",
+            "keyword": "JOIN",
+            "risk": 2,
+            "effort_days": 1,
+            "effort_hrs": 8
+        },
+        {
+            "name": "ETL Mapping",
+            "keyword": "MAPPING",
+            "risk": 2,
+            "effort_days": 2,
+            "effort_hrs": 16
+        },
+        {
+            "name": "Workflow / Job Schedule",
+            "keyword": "WORKFLOW",
+            "risk": 2,
+            "effort_days": 1,
+            "effort_hrs": 8
+        },
+        {
+            "name": "Session Config",
+            "keyword": "SESSION",
+            "risk": 1,
+            "effort_days": 1,
+            "effort_hrs": 4
+        },
+        {
+            "name": "Expression / Formula",
+            "keyword": "EXPRESSION",
+            "risk": 2,
+            "effort_days": 1,
+            "effort_hrs": 8
+        },
+        {
+            "name": "Filter Condition",
+            "keyword": "FILTER",
+            "risk": 1,
+            "effort_days": 1,
+            "effort_hrs": 4
+        },
+        {
+            "name": "Schema / Column Definition",
+            "keyword": "COLUMN",
+            "risk": 1,
+            "effort_days": 1,
+            "effort_hrs": 4
+        },
+        {
+            "name": "Data Schema",
+            "keyword": "SCHEMA",
+            "risk": 3,
+            "effort_days": 2,
+            "effort_hrs": 16
+        },
+        {
+            "name": "Data Pipeline",
+            "keyword": "PIPELINE",
+            "risk": 3,
+            "effort_days": 3,
+            "effort_hrs": 24
+        },
+        {
+            "name": "Connector / Connection",
+            "keyword": "CONNECTOR",
+            "risk": 2,
+            "effort_days": 1,
+            "effort_hrs": 8
+        },
+        {
+            "name": "Repository / Metadata",
+            "keyword": "REPOSITORY",
+            "risk": 2,
+            "effort_days": 1,
+            "effort_hrs": 8
+        },
+        {
+            "name": "Key / Index",
+            "keyword": "KEY",
+            "risk": 2,
+            "effort_days": 1,
+            "effort_hrs": 8
+        },
+        {
+            "name": "Data Constraint",
+            "keyword": "CONSTRAINT",
+            "risk": 2,
+            "effort_days": 1,
+            "effort_hrs": 8
+        },
+        {
+            "name": "Cache Layer",
+            "keyword": "CACHE",
+            "risk": 1,
+            "effort_days": 1,
+            "effort_hrs": 4
+        },
+        {
+            "name": "Logging / Audit",
+            "keyword": "LOG",
+            "risk": 1,
+            "effort_days": 1,
+            "effort_hrs": 4
+        },
+        {
+            "name": "Configuration",
+            "keyword": "CONFIG",
+            "risk": 1,
+            "effort_days": 1,
+            "effort_hrs": 4
+        },
+        {
+            "name": "Parameter / Variable",
+            "keyword": "PARAMETER",
+            "risk": 1,
+            "effort_days": 1,
+            "effort_hrs": 4
+        }
+    ],
+    "risk_level": "HIGH",
+    "risk_score": 40,
+    "effort_days": 30,
+    "effort_hrs": 212,
+    "fast_delivery_days": 15,
+    "client_note": "\u26a0\ufe0f This change has HIGH risk. Multiple critical components are affected. Regression testing is mandatory before deployment.",
+    "total_components": 21
+}
