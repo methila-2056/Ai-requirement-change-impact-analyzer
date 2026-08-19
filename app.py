@@ -1,7 +1,6 @@
-from dotenv import load_dotenv
-load_dotenv()
-
 import os
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
 import re
 import json
 import secrets
@@ -69,7 +68,7 @@ def safe_filename(filename):
 
 def send_reset_email(to_email, reset_url):
     if not SMTP_USER or not SMTP_PASS:
-        app.logger.warning("SMTP not configured. Reset link: %s", reset_url)
+        app.logger.warning("SMTP not configured. User=%s Pass_set=%s", SMTP_USER, bool(SMTP_PASS))
         return False
 
     msg = MIMEMultipart("alternative")
@@ -99,7 +98,7 @@ def send_reset_email(to_email, reset_url):
     msg.attach(MIMEText(html_body, "html"))
 
     try:
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=30) as server:
             server.ehlo()
             server.starttls()
             server.ehlo()
@@ -107,7 +106,7 @@ def send_reset_email(to_email, reset_url):
             server.sendmail(MAIL_FROM, [to_email], msg.as_string())
         return True
     except Exception as e:
-        app.logger.error("Failed to send reset email: %s", e)
+        app.logger.error("Failed to send reset email to %s: %s", to_email, e)
         return False
 
 
