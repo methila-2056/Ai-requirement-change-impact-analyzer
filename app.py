@@ -2,6 +2,9 @@ import os
 import re
 import json
 import secrets
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
 from functools import wraps
 
@@ -28,6 +31,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///impact_analyzer.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
 
+SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.gmail.com")
+SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
+SMTP_USER = os.environ.get("SMTP_USER", "")
+SMTP_PASS = os.environ.get("SMTP_PASS", "")
+MAIL_FROM = os.environ.get("MAIL_FROM", SMTP_USER)
+
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
 REPORT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -53,6 +62,50 @@ def safe_filename(filename):
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     clean = re.sub(r'[^\w.\-]', '', filename)
     return f"{ts}_{clean}"
+
+
+def send_reset_email(to_email, reset_url):
+    if not SMTP_USER or not SMTP_PASS:
+        app.logger.warning("SMTP not configured. Reset link: %s", reset_url)
+        return False
+
+    msg = MIMEMultipart("alternative")
+    msg["From"] = MAIL_FROM
+    msg["To"] = to_email
+    msg["Subject"] = "Strategic Impact Analyzer — Password Reset"
+
+    text_body = f"You requested a password reset.\n\nClick the link below to set a new password:\n\n{reset_url}\n\nThis link expires in 1 hour.\nIf you did not request this, ignore this email."
+
+    html_body = f"""
+    <div style="font-family:Inter,-apple-system,sans-serif;max-width:480px;margin:0 auto;padding:32px;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <div style="display:inline-block;width:48px;height:48px;background:linear-gradient(135deg,#5b6ef5,#a855f7);border-radius:12px;line-height:48px;font-size:22px;color:#fff;">&#9889;</div>
+      </div>
+      <h2 style="text-align:center;color:#1a1d2e;margin-bottom:8px;">Password Reset Request</h2>
+      <p style="text-align:center;color:#4a5068;font-size:14px;">You requested to reset your password for <strong>Strategic Impact Analyzer</strong>.</p>
+      <div style="text-align:center;margin:28px 0;">
+        <a href="{reset_url}" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#5b6ef5,#a855f7);color:#fff;text-decoration:none;border-radius:12px;font-weight:600;font-size:15px;">Reset Password</a>
+      </div>
+      <p style="color:#8890a8;font-size:12px;text-align:center;">This link expires in <strong>1 hour</strong>.</p>
+      <p style="color:#8890a8;font-size:12px;text-align:center;">If you did not request this, you can safely ignore this email.</p>
+      <hr style="border:none;border-top:1px solid #e2e5ee;margin:24px 0;">
+      <p style="color:#8890a8;font-size:11px;text-align:center;">Strategic Impact Analyzer &middot; Automated email — do not reply</p>
+    </div>"""
+
+    msg.attach(MIMEText(text_body, "plain"))
+    msg.attach(MIMEText(html_body, "html"))
+
+    try:
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+            server.login(SMTP_USER, SMTP_PASS)
+            server.sendmail(MAIL_FROM, [to_email], msg.as_string())
+        return True
+    except Exception as e:
+        app.logger.error("Failed to send reset email: %s", e)
+        return False
 
 
 @app.route("/")
@@ -151,9 +204,13 @@ def forgot_password():
             db.session.commit()
 
             reset_link = url_for("reset_password", token=reset_token.token, _external=True)
-            flash(f"Password reset link: {reset_link}", "success")
+            sent = send_reset_email(email, reset_link)
+            if sent:
+                flash("Password reset link sent to your email.", "success")
+            else:
+                flash("Could not send email. Please try again later.", "error")
         else:
-            flash("If that email is registered, a reset link has been generated.", "info")
+            flash("If that email is registered, a reset link has been sent.", "info")
 
         return redirect(url_for("forgot_password"))
 
