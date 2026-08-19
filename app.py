@@ -1,6 +1,10 @@
 import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 from dotenv import load_dotenv
-load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
+load_dotenv(os.path.join(basedir, ".env"))
+
 import re
 import json
 import secrets
@@ -29,7 +33,10 @@ from analyzer.report_generator import generate_report, save_report, save_json_re
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", secrets.token_hex(32))
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///impact_analyzer.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
+    "DATABASE_URL",
+    "sqlite:///" + os.path.join(basedir, "instance", "impact_analyzer.db")
+)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
 
@@ -39,10 +46,11 @@ SMTP_USER = os.environ.get("SMTP_USER", "")
 SMTP_PASS = os.environ.get("SMTP_PASS", "")
 MAIL_FROM = os.environ.get("MAIL_FROM", SMTP_USER)
 
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
-REPORT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
+UPLOAD_FOLDER = os.path.join(basedir, "uploads")
+REPORT_FOLDER = os.path.join(basedir, "reports")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(REPORT_FOLDER, exist_ok=True)
+os.makedirs(os.path.join(basedir, "instance"), exist_ok=True)
 
 db.init_app(app)
 login_manager = LoginManager(app)
