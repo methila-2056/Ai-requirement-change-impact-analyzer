@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Strategic Impact Analyzer{% endblock %}
+
+{% block content %}
+<div class="page-wrapper narrow">
+
+  <div class="dash-header">
+    <div class="dash-header-left">
+      <h1>Analysis Dashboard</h1>
+      <p>Upload an XML file to get instant impact analysis with risk scoring and effort estimation.</p>
+    </div>
+    <div class="dash-header-right">
+      <div class="dash-user-badge">
+        <div class="dash-user-avatar">{{ current_user.username[0]|upper }}</div>
+        <div class="dash-user-info">
+          <span class="dash-user-name">{{ current_user.full_name or current_user.username }}</span>
+          <span class="dash-user-role">Analyst</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-stats">
+    <div class="dash-stat">
+      <div class="dash-stat-icon blue"><i class="icon-bar-chart-2"></i></div>
+      <div class="dash-stat-info">
+        <div class="dash-stat-value">{{ total_analyses }}</div>
+        <div class="dash-stat-label">Total Analyses</div>
+      </div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-icon green"><i class="icon-check-circle"></i></div>
+      <div class="dash-stat-info">
+        <div class="dash-stat-value">Active</div>
+        <div class="dash-stat-label">Account Status</div>
+      </div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-icon purple"><i class="icon-shield"></i></div>
+      <div class="dash-stat-info">
+        <div class="dash-stat-value">42+</div>
+        <div class="dash-stat-label">Rules Loaded</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Section -->
+  <div class="upload-section">
+    <div class="upload-zone" id="uploadZone">
+      <div class="upload-icon-wrap">
+        <i class="icon-upload-cloud"></i>
+      </div>
+      <div class="upload-title">Drop your XML file here</div>
+      <div class="upload-sub">
+        <i class="icon-file"></i> Drag &amp; drop or click to browse
+      </div>
+      <div class="upload-formats">.xml files only &middot; Max 16 MB</div>
+      <div class="file-chosen" id="fileChosen">
+        <i class="icon-file-text"></i>
+        <span id="chosenFileName"></span>
+        <button type="button" class="file-chosen-remove" onclick="event.stopPropagation(); resetTool();">
+          <i class="icon-x"></i>
+        </button>
+      </div>
+      <input type="file" id="fileInput" accept=".xml" style="display:none">
+    </div>
+
+    <div class="error-box" id="errorBox"></div>
+
+    <button class="btn btn-primary btn-block btn-lg" id="btnAnalyze" style="margin-top:24px; position:relative; overflow:hidden;" disabled>
+      <i class="icon-zap"></i> Analyze Impact
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading" id="loadingDiv">
+    <div class="spinner"></div>
+    <p class="loading-title">Analyzing your XML file...</p>
+    <p class="loading-steps">
+      <span class="loading-step active" id="step1">Parsing XML</span>
+      <i class="icon-chevron-right loading-arrow"></i>
+      <span class="loading-step" id="step2">Scanning Components</span>
+      <i class="icon-chevron-right loading-arrow"></i>
+      <span class="loading-step" id="step3">Generating Report</span>
+    </p>
+  </div>
+
+  <!-- Results -->
+  <div id="results">
+    <div class="divider"></div>
+
+    <div class="results-header">
+      <div class="results-header-left">
+        <div class="results-title">Impact Analysis Report</div>
+        <div class="results-file" id="resultsFileName"></div>
+      </div>
+      <div id="riskBadge"></div>
+    </div>
+
+    <div class="stats-row" id="statsRow"></div>
+
+    <div class="section-title"><i class="icon-layers"></i> Affected Components</div>
+    <div class="components-list" id="componentsList"></div>
+
+    <div class="client-note">
+      <div class="client-note-header">
+        <i class="icon-message-square"></i>
+        <div class="section-title" style="margin-bottom:0;">Client Communication Note</div>
+      </div>
+      <p id="clientNote"></p>
+    </div>
+
+    <div class="report-box">
+      <div class="report-box-header">
+        <span><i class="icon-file-text"></i> impact_report.txt</span>
+        <button class="btn-copy" onclick="copyReport()">
+          <i class="icon-copy"></i> Copy
+        </button>
+      </div>
+      <pre class="report-pre" id="reportPre"></pre>
+    </div>
+
+    <div class="actions-row">
+      <button class="btn btn-outline" onclick="resetTool()">
+        <i class="icon-refresh-cw"></i> Analyze Another File
+      </button>
+      <button class="btn btn-outline" onclick="downloadReport()">
+        <i class="icon-download"></i> Download Report
+      </button>
+    </div>
+  </div>
+
+  <!-- Recent Analyses -->
+  {% if recent %}
+  <div class="divider"></div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="icon-clock"></i> Recent Analyses
+      </div>
+      <a href="{{ url_for('history') }}" class="btn btn-ghost btn-sm">
+        View All <i class="icon-arrow-right"></i>
+      </a>
+    </div>
+    <div class="table-wrap">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Risk</th>
+            <th>Score</th>
+            <th>Effort</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in recent %}
+          <tr>
+            <td class="filename">{{ entry.filename[:30] }}{% if entry.filename|length > 30 %}...{% endif %}</td>
+            <td><span class="risk-pill {{ entry.risk_level }}">{{ entry.risk_level }}</span></td>
+            <td class="mono">{{ entry.risk_score }}</td>
+            <td class="mono">{{ entry.effort_days }}d / {{ entry.effort_hrs }}h</td>
+            <td class="text-muted">{{ entry.created_at.strftime('%b %d, %H:%M') }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+﻿{% extends "base.html" %}
+{% block title %}Profile Settings — Strategic Impact Analyzer{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-card" style="max-width: 480px;">
+    <div class="auth-header">
+      <div class="auth-logo">
+        <i class="icon-settings"></i>
+      </div>
+      <h2>Profile Settings</h2>
+      <p class="auth-sub">Manage your account information</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('profile') }}" class="auth-form">
+      <div class="form-group">
+        <label class="form-label" for="full_name">
+          <i class="icon-user"></i> Full Name
+        </label>
+        <input class="form-input" type="text" id="full_name" name="full_name" value="{{ current_user.full_name or '' }}" placeholder="Your full name">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">
+          <i class="icon-mail"></i> Email
+        </label>
+        <input class="form-input" type="email" id="email" name="email" value="{{ current_user.email }}" required>
+      </div>
+
+      <div class="divider" style="margin: 24px 0;"></div>
+
+      <div class="form-group">
+        <label class="form-label" for="current_password">
+          <i class="icon-lock"></i> Current Password
+        </label>
+        <input class="form-input" type="password" id="current_password" name="current_password" placeholder="Required to change password">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="new_password">
+          <i class="icon-key"></i> New Password
+        </label>
+        <div class="input-with-icon">
+          <input class="form-input" type="password" id="new_password" name="new_password" placeholder="Leave blank to keep current">
+          <button type="button" class="input-icon-btn" onclick="togglePassword(this)" aria-label="Toggle password visibility">
+            <i class="icon-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg">
+        <i class="icon-save"></i> Save Changes
+      </button>
+    </form>
+
+    <div class="auth-divider">
+      <span>Account Info</span>
+    </div>
+
+    <div class="profile-info">
+      <div class="profile-info-row">
+        <span class="profile-info-label">Username</span>
+        <span class="profile-info-value">{{ current_user.username }}</span>
+      </div>
+      <div class="profile-info-row">
+        <span class="profile-info-label">Member Since</span>
+        <span class="profile-info-value">{{ current_user.created_at.strftime('%B %d, %Y') }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

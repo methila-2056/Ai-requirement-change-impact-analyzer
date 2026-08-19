@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Analysis History — Strategic Impact Analyzer{% endblock %}
+
+{% block content %}
+<div class="page-wrapper narrow">
+
+  <div class="dash-header">
+    <div class="dash-header-left">
+      <h1>Analysis History</h1>
+      <p>View and manage all your past impact analyses.</p>
+    </div>
+    <div class="dash-header-right">
+      <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-sm">
+        <i class="icon-plus"></i> New Analysis
+      </a>
+    </div>
+  </div>
+
+  {% if pagination.items %}
+  <div class="card">
+    <div class="table-wrap">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Risk</th>
+            <th>Score</th>
+            <th>Components</th>
+            <th>Effort</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in pagination.items %}
+          <tr>
+            <td class="filename">
+              <i class="icon-file-text" style="margin-right:6px;opacity:0.5;"></i>
+              {{ entry.filename[:28] }}{% if entry.filename|length > 28 %}...{% endif %}
+            </td>
+            <td><span class="risk-pill {{ entry.risk_level }}">{{ entry.risk_level }}</span></td>
+            <td class="mono">{{ entry.risk_score }}</td>
+            <td class="mono">{{ entry.total_components }}</td>
+            <td class="mono">{{ entry.effort_days }}d / {{ entry.effort_hrs }}h</td>
+            <td class="text-muted">{{ entry.created_at.strftime('%b %d, %Y %H:%M') }}</td>
+            <td>
+              <div class="table-actions">
+                <a href="{{ url_for('view_analysis', analysis_id=entry.id) }}" class="btn btn-ghost btn-xs">
+                  <i class="icon-eye"></i> View
+                </a>
+                <form method="POST" action="{{ url_for('delete_analysis', analysis_id=entry.id) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this analysis?');">
+                  <button type="submit" class="btn btn-ghost btn-xs danger">
+                    <i class="icon-trash-2"></i>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {% if pagination.pages > 1 %}
+  <div class="pagination">
+    {% if pagination.has_prev %}
+      <a href="{{ url_for('history', page=pagination.prev_num) }}" class="pagination-btn">
+        <i class="icon-chevron-left"></i> Prev
+      </a>
+    {% endif %}
+
+    {% for p in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+      {% if p %}
+        {% if p == pagination.page %}
+          <span class="pagination-btn active">{{ p }}</span>
+        {% else %}
+          <a href="{{ url_for('history', page=p) }}" class="pagination-btn">{{ p }}</a>
+        {% endif %}
+      {% else %}
+        <span class="pagination-ellipsis">&hellip;</span>
+      {% endif %}
+    {% endfor %}
+
+    {% if pagination.has_next %}
+      <a href="{{ url_for('history', page=pagination.next_num) }}" class="pagination-btn">
+        Next <i class="icon-chevron-right"></i>
+      </a>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-state-icon"><i class="icon-inbox"></i></div>
+    <h3>No analyses yet</h3>
+    <p>Upload your first XML file to get started with impact analysis.</p>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary" style="margin-top:20px;">
+      <i class="icon-upload-cloud"></i> Go to Dashboard
+    </a>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

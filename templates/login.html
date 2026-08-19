@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Sign In — Strategic Impact Analyzer{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo">
+        <i class="icon-zap"></i>
+      </div>
+      <h2>Welcome back</h2>
+      <p class="auth-sub">Sign in to access the impact analyzer</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('login') }}" class="auth-form">
+      <div class="form-group">
+        <label class="form-label" for="username">
+          <i class="icon-user"></i> Username
+        </label>
+        <input class="form-input" type="text" id="username" name="username"
+               placeholder="Enter your username" required autofocus autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">
+          <i class="icon-lock"></i> Password
+        </label>
+        <div class="input-with-icon">
+          <input class="form-input" type="password" id="password" name="password"
+                 placeholder="Enter your password" required autocomplete="current-password">
+          <button type="button" class="input-icon-btn" onclick="togglePassword(this)" aria-label="Toggle password visibility">
+            <i class="icon-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-checkbox">
+          <input type="checkbox" name="remember">
+          <span>Remember me</span>
+        </label>
+        <a href="#" class="form-link-sm">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg">
+        <i class="icon-log-in"></i> Sign In
+      </button>
+    </form>
+
+    <div class="auth-divider">
+      <span>New to SIA?</span>
+    </div>
+
+    <a href="{{ url_for('register') }}" class="btn btn-outline btn-block">
+      <i class="icon-user-plus"></i> Create an account
+    </a>
+  </div>
+</div>
+{% endblock %}

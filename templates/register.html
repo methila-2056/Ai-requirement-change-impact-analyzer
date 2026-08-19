@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Create Account — Strategic Impact Analyzer{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo">
+        <i class="icon-user-plus"></i>
+      </div>
+      <h2>Create account</h2>
+      <p class="auth-sub">Start analyzing impact in seconds</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('register') }}" class="auth-form" id="registerForm">
+      <div class="form-group">
+        <label class="form-label" for="full_name">
+          <i class="icon-user"></i> Full Name
+        </label>
+        <input class="form-input" type="text" id="full_name" name="full_name"
+               placeholder="Your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="username">
+          <i class="icon-at-sign"></i> Username
+        </label>
+        <input class="form-input" type="text" id="username" name="username"
+               placeholder="Choose a username" required minlength="3" autocomplete="username">
+        <p class="form-help">At least 3 characters</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">
+          <i class="icon-mail"></i> Email
+        </label>
+        <input class="form-input" type="email" id="email" name="email"
+               placeholder="you@example.com" required autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">
+          <i class="icon-lock"></i> Password
+        </label>
+        <div class="input-with-icon">
+          <input class="form-input" type="password" id="password" name="password"
+                 placeholder="At least 6 characters" required minlength="6" autocomplete="new-password"
+                 oninput="checkPasswordStrength(this.value)">
+          <button type="button" class="input-icon-btn" onclick="togglePassword(this)" aria-label="Toggle password visibility">
+            <i class="icon-eye"></i>
+          </button>
+        </div>
+        <div class="password-strength" id="passwordStrength">
+          <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+          <span class="strength-text" id="strengthText"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="confirm_password">
+          <i class="icon-lock"></i> Confirm Password
+        </label>
+        <input class="form-input" type="password" id="confirm_password" name="confirm_password"
+               placeholder="Repeat your password" required autocomplete="new-password">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg">
+        <i class="icon-rocket"></i> Create Account
+      </button>
+    </form>
+
+    <div class="auth-divider">
+      <span>Already have an account?</span>
+    </div>
+
+    <a href="{{ url_for('login') }}" class="btn btn-outline btn-block">
+      <i class="icon-log-in"></i> Sign in instead
+    </a>
+  </div>
+</div>
+{% endblock %}

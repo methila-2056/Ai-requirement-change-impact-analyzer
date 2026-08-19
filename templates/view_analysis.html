@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Analysis #{{ entry.id }} — Strategic Impact Analyzer{% endblock %}
+
+{% block content %}
+<div class="page-wrapper narrow">
+
+  <div class="view-back">
+    <a href="{{ url_for('history') }}" class="btn btn-ghost btn-sm">
+      <i class="icon-arrow-left"></i> Back to History
+    </a>
+  </div>
+
+  <div class="results-header" style="animation: fadeUp 0.5s ease both;">
+    <div class="results-header-left">
+      <div class="results-title">Impact Analysis Report</div>
+      <div class="results-file">{{ entry.filename }}</div>
+    </div>
+    <div>
+      <span class="risk-badge risk-{{ entry.risk_level }}">
+        <i class="icon-shield"></i> {{ entry.risk_level }} RISK
+      </span>
+    </div>
+  </div>
+
+  <div class="stats-row" style="animation: fadeUp 0.5s 0.1s ease both;">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="icon-activity"></i></div>
+      <div class="stat-label">Risk Score</div>
+      <div class="stat-value">{{ entry.risk_score }}</div>
+      <div class="stat-unit">points</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="icon-layers"></i></div>
+      <div class="stat-label">Components Hit</div>
+      <div class="stat-value">{{ entry.total_components }}</div>
+      <div class="stat-unit">modules affected</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="icon-clock"></i></div>
+      <div class="stat-label">Effort (Normal)</div>
+      <div class="stat-value">{{ entry.effort_days }}</div>
+      <div class="stat-unit">{{ entry.effort_hrs }} man-hours</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="icon-zap"></i></div>
+      <div class="stat-label">Fast Delivery</div>
+      <div class="stat-value">{{ entry.fast_delivery_days }}</div>
+      <div class="stat-unit">days (2-person team)</div>
+    </div>
+  </div>
+
+  {% if impact.components is defined and impact.components %}
+  <div style="animation: fadeUp 0.5s 0.15s ease both;">
+    <div class="section-title"><i class="icon-layers"></i> Affected Components</div>
+    <div class="components-list">
+      {% for c in impact.components %}
+      <div class="component-row" style="animation-delay: {{ loop.index0 * 0.04 }}s;">
+        <span class="comp-dot dot-{{ 'HIGH' if c.risk >= 3 else ('MED' if c.risk == 2 else 'LOW') }}"></span>
+        <span class="comp-name">{{ c.name }}</span>
+        <span class="comp-keyword">{{ c.keyword }}</span>
+        <span class="comp-effort">+{{ c.effort_days }}d / {{ c.effort_hrs }}h</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="client-note" style="animation: fadeUp 0.5s 0.2s ease both;">
+    <div class="client-note-header">
+      <i class="icon-message-square"></i>
+      <div class="section-title" style="margin-bottom:0;">Client Communication Note</div>
+    </div>
+    <p>{{ entry.client_note }}</p>
+  </div>
+
+  {% if entry.report_text %}
+  <div class="report-box" style="animation: fadeUp 0.5s 0.25s ease both;">
+    <div class="report-box-header">
+      <span><i class="icon-file-text"></i> impact_report.txt</span>
+      <button class="btn-copy" onclick="navigator.clipboard.writeText(document.getElementById('reportPre').textContent).then(()=>{this.innerHTML='<i class=\'icon-check\'></i> Copied!'; setTimeout(()=>this.innerHTML='<i class=\'icon-copy\'></i> Copy',2000);})">
+        <i class="icon-copy"></i> Copy
+      </button>
+    </div>
+    <pre class="report-pre" id="reportPre">{{ entry.report_text }}</pre>
+  </div>
+  {% endif %}
+
+  <div class="view-timestamp">
+    <i class="icon-clock"></i> Analyzed on {{ entry.created_at.strftime('%B %d, %Y at %H:%M') }}
+  </div>
+
+</div>
+{% endblock %}
