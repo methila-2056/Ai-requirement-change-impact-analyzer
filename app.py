@@ -2,7 +2,7 @@ import os
 import re
 import json
 import secrets
-from datetime import datetime
+from datetime import datetime, timedelta
 from functools import wraps
 
 from flask import (
@@ -16,7 +16,7 @@ from flask_login import (
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 
-from models import db, User, AnalysisHistory
+from models import db, User, AnalysisHistory, ResetToken
 from analyzer.xml_parser import parse_xml, xml_to_json
 from analyzer.impact_engine import analyze_impact
 from analyzer.report_generator import generate_report, save_report, save_json_report
@@ -130,6 +130,67 @@ def login():
         return redirect(next_page or url_for("dashboard"))
 
     return render_template("login.html")
+
+
+@app.route("/forgot-password", methods=["GET", "POST"])
+def forgot_password():
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard"))
+
+    if request.method == "POST":
+        email = request.form.get("email", "").strip().lower()
+        user = User.query.filter_by(email=email).first()
+
+        if user:
+            ResetToken.query.filter_by(user_id=user.id, used=False).update({"used": True})
+            reset_token = ResetToken(
+                user_id=user.id,
+                expires_at=datetime.utcnow() + timedelta(hours=1),
+            )
+            db.session.add(reset_token)
+            db.session.commit()
+
+            reset_link = url_for("reset_password", token=reset_token.token, _external=True)
+            flash(f"Password reset link: {reset_link}", "success")
+        else:
+            flash("If that email is registered, a reset link has been generated.", "info")
+
+        return redirect(url_for("forgot_password"))
+
+    return render_template("forgot_password.html")
+
+
+@app.route("/reset-password/<token>", methods=["GET", "POST"])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard"))
+
+    reset_token = ResetToken.query.filter_by(token=token).first()
+    if not reset_token or not reset_token.is_valid():
+        flash("Invalid or expired reset link. Please request a new one.", "error")
+        return redirect(url_for("forgot_password"))
+
+    if request.method == "POST":
+        password = request.form.get("password", "")
+        confirm = request.form.get("confirm_password", "")
+
+        if len(password) < 6:
+            flash("Password must be at least 6 characters.", "error")
+            return render_template("reset_password.html", token=token)
+
+        if password != confirm:
+            flash("Passwords do not match.", "error")
+            return render_template("reset_password.html", token=token)
+
+        user = User.query.get(reset_token.user_id)
+        user.set_password(password)
+        reset_token.used = True
+        db.session.commit()
+
+        flash("Password reset successful! Please sign in.", "success")
+        return redirect(url_for("login"))
+
+    return render_template("reset_password.html", token=token)
 
 
 @app.route("/logout")

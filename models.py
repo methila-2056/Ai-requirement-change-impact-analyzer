@@ -1,7 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, timedelta
+import secrets
 
 db = SQLAlchemy()
 
@@ -40,3 +41,20 @@ class AnalysisHistory(db.Model):
     report_text = db.Column(db.Text, nullable=True)
     impact_json = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class ResetToken(db.Model):
+    __tablename__ = "reset_tokens"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False, index=True)
+    token = db.Column(db.String(64), unique=True, nullable=False, index=True, default=lambda: secrets.token_urlsafe(48))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    expires_at = db.Column(db.DateTime, nullable=False)
+    used = db.Column(db.Boolean, default=False)
+
+    def is_expired(self):
+        return datetime.utcnow() > self.expires_at
+
+    def is_valid(self):
+        return not self.used and not self.is_expired()
