@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-Powered Change Impact Analysis for Software Requirements — Analyze XML configurations, map dependencies, calculate risk scores.">
+  <title>Analysis — Strategic Impact Analyzer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9889;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="nav-brand">
+        <div class="nav-brand-icon"><i class="icon-zap"></i></div>
+        <div class="nav-brand-text">
+          <span class="nav-brand-name">SIA</span>
+          <span class="nav-brand-tag">v2.0</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks"></div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper narrow">
+
+    <div class="view-back">
+      <a href="history.html" class="btn btn-ghost btn-sm">
+        <i class="icon-arrow-left"></i> Back to History
+      </a>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" id="loadingDiv">
+      <div class="spinner"></div>
+      <p class="loading-title">Loading analysis...</p>
+    </div>
+
+    <!-- Results (hidden by default) -->
+    <div id="analysisContent" style="display:none;">
+
+      <div class="results-header" style="animation: fadeUp 0.5s ease both;">
+        <div class="results-header-left">
+          <div class="results-title">Impact Analysis Report</div>
+          <div class="results-file" id="analysisFilename"></div>
+        </div>
+        <div id="riskBadge"></div>
+      </div>
+
+      <div class="stats-row" style="animation: fadeUp 0.5s 0.1s ease both;" id="statsRow"></div>
+
+      <div style="animation: fadeUp 0.5s 0.15s ease both;">
+        <div class="section-title"><i class="icon-layers"></i> Affected Components</div>
+        <div class="components-list" id="componentsList"></div>
+      </div>
+
+      <div class="client-note" style="animation: fadeUp 0.5s 0.2s ease both;">
+        <div class="client-note-header">
+          <i class="icon-message-square"></i>
+          <div class="section-title" style="margin-bottom:0;">Client Communication Note</div>
+        </div>
+        <p id="clientNote"></p>
+      </div>
+
+      <div class="report-box" id="reportBox" style="animation: fadeUp 0.5s 0.25s ease both;">
+        <div class="report-box-header">
+          <span><i class="icon-file-text"></i> impact_report.txt</span>
+          <button class="btn-copy" id="btnCopy">
+            <i class="icon-copy"></i> Copy
+          </button>
+        </div>
+        <pre class="report-pre" id="reportPre"></pre>
+      </div>
+
+      <div class="view-timestamp">
+        <i class="icon-clock"></i> Analyzed on <span id="analysisTimestamp"></span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-brand-icon" style="width:28px;height:28px;font-size:14px;">
+          <i class="icon-zap"></i>
+        </div>
+        <span>SIA</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="https://github.com/methila-2056/Ai-requirement-change-impact-analyzer" target="_blank" rel="noopener">Source Code</a>
+        <a href="register.html">Get Started</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 Strategic Impact Analyzer. Built with precision.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    (function() {
+      var token = localStorage.getItem('sia_token');
+      if (!token) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      var params = new URLSearchParams(window.location.search);
+      var analysisId = params.get('id');
+      if (!analysisId) {
+        window.location.href = 'history.html';
+        return;
+      }
+
+      fetch('/api/analysis/' + analysisId, {
+        headers: { 'Authorization': 'Bearer ' + token }
+      }).then(function(res) { return res.json(); }).then(function(data) {
+        document.getElementById('loadingDiv').classList.remove('show');
+
+        if (data.error) {
+          if (data.error === 'Unauthorized') {
+            localStorage.removeItem('sia_token');
+            localStorage.removeItem('sia_user');
+            window.location.href = 'login.html';
+          }
+          return;
+        }
+
+        var entry = data.entry;
+        var impact = data.impact || {};
+
+        document.getElementById('analysisFilename').textContent = entry.filename;
+        document.title = 'Analysis #' + entry.id + ' — Strategic Impact Analyzer';
+
+        document.getElementById('riskBadge').innerHTML =
+          '<span class="risk-badge risk-' + entry.risk_level + '">' +
+          '<i class="icon-shield"></i> ' + entry.risk_level + ' RISK</span>';
+
+        document.getElementById('statsRow').innerHTML =
+          '<div class="stat-card">' +
+            '<div class="stat-icon"><i class="icon-activity"></i></div>' +
+            '<div class="stat-label">Risk Score</div>' +
+            '<div class="stat-value">' + entry.risk_score + '</div>' +
+            '<div class="stat-unit">points</div>' +
+          '</div>' +
+          '<div class="stat-card">' +
+            '<div class="stat-icon"><i class="icon-layers"></i></div>' +
+            '<div class="stat-label">Components Hit</div>' +
+            '<div class="stat-value">' + entry.total_components + '</div>' +
+            '<div class="stat-unit">modules affected</div>' +
+          '</div>' +
+          '<div class="stat-card">' +
+            '<div class="stat-icon"><i class="icon-clock"></i></div>' +
+            '<div class="stat-label">Effort (Normal)</div>' +
+            '<div class="stat-value">' + entry.effort_days + '</div>' +
+            '<div class="stat-unit">' + entry.effort_hrs + ' man-hours</div>' +
+          '</div>' +
+          '<div class="stat-card">' +
+            '<div class="stat-icon"><i class="icon-zap"></i></div>' +
+            '<div class="stat-label">Fast Delivery</div>' +
+            '<div class="stat-value">' + entry.fast_delivery_days + '</div>' +
+            '<div class="stat-unit">days (2-person team)</div>' +
+          '</div>';
+
+        var compList = document.getElementById('componentsList');
+        if (impact.components && impact.components.length > 0) {
+          compList.innerHTML = impact.components.map(function(c, i) {
+            var dotClass = c.risk >= 3 ? 'dot-HIGH' : c.risk === 2 ? 'dot-MED' : 'dot-LOW';
+            return '<div class="component-row" style="animation-delay:' + (i * 0.04) + 's;">' +
+              '<span class="comp-dot ' + dotClass + '"></span>' +
+              '<span class="comp-name">' + c.name + '</span>' +
+              '<span class="comp-keyword">' + c.keyword + '</span>' +
+              '<span class="comp-effort">+' + c.effort_days + 'd / ' + c.effort_hrs + 'h</span>' +
+            '</div>';
+          }).join('');
+        } else {
+          compList.innerHTML = '<div class="empty-components">No standard components detected. Manual review recommended.</div>';
+        }
+
+        document.getElementById('clientNote').textContent = entry.client_note || impact.client_note || '';
+
+        var reportText = entry.report_text || '';
+        if (reportText) {
+          document.getElementById('reportPre').textContent = reportText;
+          document.getElementById('btnCopy').addEventListener('click', function() {
+            var btn = this;
+            navigator.clipboard.writeText(reportText).then(function() {
+              btn.innerHTML = '<i class="icon-check"></i> Copied!';
+              setTimeout(function() { btn.innerHTML = '<i class="icon-copy"></i> Copy'; }, 2000);
+            });
+          });
+        } else {
+          document.getElementById('reportBox').style.display = 'none';
+        }
+
+        document.getElementById('analysisTimestamp').textContent = entry.created_at || '';
+        document.getElementById('analysisContent').style.display = '';
+      });
+    })();
+  </script>
+</body>
+</html>

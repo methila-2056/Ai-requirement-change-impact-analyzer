@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-Powered Change Impact Analysis for Software Requirements — Analyze XML configurations, map dependencies, calculate risk scores.">
+  <title>Analysis History — Strategic Impact Analyzer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9889;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="nav-brand">
+        <div class="nav-brand-icon"><i class="icon-zap"></i></div>
+        <div class="nav-brand-text">
+          <span class="nav-brand-name">SIA</span>
+          <span class="nav-brand-tag">v2.0</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks"></div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper narrow">
+
+    <div class="dash-header">
+      <div class="dash-header-left">
+        <h1>Analysis History</h1>
+        <p>View and manage all your past impact analyses.</p>
+      </div>
+      <div class="dash-header-right">
+        <a href="dashboard.html" class="btn btn-primary btn-sm">
+          <i class="icon-plus"></i> New Analysis
+        </a>
+      </div>
+    </div>
+
+    <!-- Table (shown when data exists) -->
+    <div class="card" id="historyCard" style="display:none;">
+      <div class="table-wrap">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>File</th>
+              <th>Risk</th>
+              <th>Score</th>
+              <th>Components</th>
+              <th>Effort</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination" style="display:none;"></div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-state-icon"><i class="icon-inbox"></i></div>
+      <h3>No analyses yet</h3>
+      <p>Upload your first XML file to get started with impact analysis.</p>
+      <a href="dashboard.html" class="btn btn-primary" style="margin-top:20px;">
+        <i class="icon-upload-cloud"></i> Go to Dashboard
+      </a>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" id="loadingDiv">
+      <div class="spinner"></div>
+      <p class="loading-title">Loading history...</p>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-brand-icon" style="width:28px;height:28px;font-size:14px;">
+          <i class="icon-zap"></i>
+        </div>
+        <span>SIA</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="https://github.com/methila-2056/Ai-requirement-change-impact-analyzer" target="_blank" rel="noopener">Source Code</a>
+        <a href="register.html">Get Started</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 Strategic Impact Analyzer. Built with precision.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    (function() {
+      var token = localStorage.getItem('sia_token');
+      if (!token) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      var currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
+
+      function loadHistory(page) {
+        var loadingDiv = document.getElementById('loadingDiv');
+        var historyCard = document.getElementById('historyCard');
+        var emptyState = document.getElementById('emptyState');
+        var pagination = document.getElementById('pagination');
+
+        loadingDiv.classList.add('show');
+        historyCard.style.display = 'none';
+        emptyState.style.display = 'none';
+        pagination.style.display = 'none';
+
+        fetch('/api/history?page=' + page, {
+          headers: { 'Authorization': 'Bearer ' + token }
+        }).then(function(res) { return res.json(); }).then(function(data) {
+          loadingDiv.classList.remove('show');
+
+          if (data.error) {
+            if (data.error === 'Unauthorized') {
+              localStorage.removeItem('sia_token');
+              localStorage.removeItem('sia_user');
+              window.location.href = 'login.html';
+            }
+            return;
+          }
+
+          if (!data.items || data.items.length === 0) {
+            emptyState.style.display = '';
+            return;
+          }
+
+          var tbody = document.getElementById('historyTableBody');
+          var html = '';
+          data.items.forEach(function(entry) {
+            var displayFilename = entry.filename.length > 28
+              ? entry.filename.substring(0, 28) + '...'
+              : entry.filename;
+            html += '<tr>' +
+              '<td class="filename"><i class="icon-file-text" style="margin-right:6px;opacity:0.5;"></i>' + displayFilename + '</td>' +
+              '<td><span class="risk-pill ' + entry.risk_level + '">' + entry.risk_level + '</span></td>' +
+              '<td class="mono">' + entry.risk_score + '</td>' +
+              '<td class="mono">' + entry.total_components + '</td>' +
+              '<td class="mono">' + entry.effort_days + 'd / ' + entry.effort_hrs + 'h</td>' +
+              '<td class="text-muted">' + entry.created_at + '</td>' +
+              '<td>' +
+                '<div class="table-actions">' +
+                  '<a href="view-analysis.html?id=' + entry.id + '" class="btn btn-ghost btn-xs"><i class="icon-eye"></i> View</a>' +
+                  '<button class="btn btn-ghost btn-xs danger" onclick="deleteAnalysis(' + entry.id + ')"><i class="icon-trash-2"></i></button>' +
+                '</div>' +
+              '</td>' +
+            '</tr>';
+          });
+          tbody.innerHTML = html;
+          historyCard.style.display = '';
+
+          if (data.pages > 1) {
+            var pagHTML = '';
+            if (currentPage > 1) {
+              pagHTML += '<a href="?page=' + (currentPage - 1) + '" class="pagination-btn"><i class="icon-chevron-left"></i> Prev</a>';
+            }
+            for (var p = 1; p <= data.pages; p++) {
+              if (p === currentPage) {
+                pagHTML += '<span class="pagination-btn active">' + p + '</span>';
+              } else {
+                pagHTML += '<a href="?page=' + p + '" class="pagination-btn">' + p + '</a>';
+              }
+            }
+            if (currentPage < data.pages) {
+              pagHTML += '<a href="?page=' + (currentPage + 1) + '" class="pagination-btn">Next <i class="icon-chevron-right"></i></a>';
+            }
+            pagination.innerHTML = pagHTML;
+            pagination.style.display = '';
+          }
+        });
+      }
+
+      window.deleteAnalysis = function(id) {
+        if (!confirm('Are you sure you want to delete this analysis?')) return;
+        fetch('/api/analysis/' + id, {
+          method: 'DELETE',
+          headers: { 'Authorization': 'Bearer ' + token }
+        }).then(function(res) { return res.json(); }).then(function(data) {
+          if (!data.error) loadHistory(currentPage);
+        });
+      };
+
+      loadHistory(currentPage);
+    })();
+  </script>
+</body>
+</html>

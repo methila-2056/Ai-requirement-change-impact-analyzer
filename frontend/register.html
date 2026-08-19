@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-Powered Change Impact Analysis for Software Requirements — Analyze XML configurations, map dependencies, calculate risk scores.">
+  <title>Create Account — Strategic Impact Analyzer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9889;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="nav-brand">
+        <div class="nav-brand-icon"><i class="icon-zap"></i></div>
+        <div class="nav-brand-text">
+          <span class="nav-brand-name">SIA</span>
+          <span class="nav-brand-tag">v2.0</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks"></div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">
+          <i class="icon-user-plus"></i>
+        </div>
+        <h2>Create account</h2>
+        <p class="auth-sub">Start analyzing impact in seconds</p>
+      </div>
+
+      <div id="registerError" class="flash flash-error" style="display:none; margin-bottom:16px;">
+        <i class="icon-alert-circle"></i>
+        <span id="registerErrorText"></span>
+        <button class="flash-close" onclick="this.parentElement.style.display='none'">&times;</button>
+      </div>
+
+      <form class="auth-form" id="registerForm">
+        <div class="form-group">
+          <label class="form-label" for="full_name">
+            <i class="icon-user"></i> Full Name
+          </label>
+          <input class="form-input" type="text" id="full_name" name="full_name"
+                 placeholder="Your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="username">
+            <i class="icon-at-sign"></i> Username
+          </label>
+          <input class="form-input" type="text" id="username" name="username"
+                 placeholder="Choose a username" required minlength="3" autocomplete="username">
+          <p class="form-help">At least 3 characters</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">
+            <i class="icon-mail"></i> Email
+          </label>
+          <input class="form-input" type="email" id="email" name="email"
+                 placeholder="you@example.com" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">
+            <i class="icon-lock"></i> Password
+          </label>
+          <div class="input-with-icon">
+            <input class="form-input" type="password" id="password" name="password"
+                   placeholder="At least 6 characters" required minlength="6" autocomplete="new-password"
+                   oninput="checkPasswordStrength(this.value)">
+            <button type="button" class="input-icon-btn" onclick="togglePassword(this)" aria-label="Toggle password visibility">
+              <i class="icon-eye"></i>
+            </button>
+          </div>
+          <div class="password-strength" id="passwordStrength">
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+            <span class="strength-text" id="strengthText"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="confirm_password">
+            <i class="icon-lock"></i> Confirm Password
+          </label>
+          <input class="form-input" type="password" id="confirm_password" name="confirm_password"
+                 placeholder="Repeat your password" required autocomplete="new-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          <i class="icon-rocket"></i> Create Account
+        </button>
+      </form>
+
+      <div class="auth-divider">
+        <span>Already have an account?</span>
+      </div>
+
+      <a href="login.html" class="btn btn-outline btn-block">
+        <i class="icon-log-in"></i> Sign in instead
+      </a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-brand-icon" style="width:28px;height:28px;font-size:14px;">
+          <i class="icon-zap"></i>
+        </div>
+        <span>SIA</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="https://github.com/methila-2056/Ai-requirement-change-impact-analyzer" target="_blank" rel="noopener">Source Code</a>
+        <a href="register.html">Get Started</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 Strategic Impact Analyzer. Built with precision.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    (function() {
+      var form = document.getElementById('registerForm');
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var errBox = document.getElementById('registerError');
+        var errText = document.getElementById('registerErrorText');
+        errBox.style.display = 'none';
+
+        var fullName = document.getElementById('full_name').value.trim();
+        var username = document.getElementById('username').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirm_password').value;
+
+        if (password !== confirmPassword) {
+          errText.textContent = 'Passwords do not match.';
+          errBox.style.display = 'flex';
+          return;
+        }
+
+        try {
+          var res = await fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              full_name: fullName,
+              username: username,
+              email: email,
+              password: password
+            })
+          });
+          var data = await res.json();
+          if (data.error) {
+            errText.textContent = data.error;
+            errBox.style.display = 'flex';
+            return;
+          }
+          localStorage.setItem('sia_token', data.token);
+          localStorage.setItem('sia_user', JSON.stringify(data.user));
+          window.location.href = 'dashboard.html';
+        } catch (err) {
+          errText.textContent = 'Network error. Make sure the server is running.';
+          errBox.style.display = 'flex';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

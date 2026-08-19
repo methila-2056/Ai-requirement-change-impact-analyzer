@@ -14,14 +14,9 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
 from functools import wraps
 
-from flask import (
-    Flask, render_template, request, jsonify, send_file,
-    redirect, url_for, flash, abort
-)
-from flask_login import (
-    LoginManager, login_user, logout_user,
-    login_required, current_user
-)
+import jwt
+from flask import Flask, request, jsonify, send_file
+from flask_cors import CORS
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 
@@ -32,10 +27,12 @@ from analyzer.report_generator import generate_report, save_report, save_json_re
 
 
 app = Flask(__name__)
+CORS(app)
+
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
     "DATABASE_URL",
-    "sqlite:///" + os.path.join(basedir, "instance", "impact_analyzer.db")
+    "sqlite:///" + os.path.join(basedir, "instance", "impact_analyzer.db"),
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
@@ -53,30 +50,66 @@ os.makedirs(REPORT_FOLDER, exist_ok=True)
 os.makedirs(os.path.join(basedir, "instance"), exist_ok=True)
 
 db.init_app(app)
-login_manager = LoginManager(app)
-login_manager.login_view = "login"
-login_manager.login_message_category = "warning"
-login_manager.login_message = "Please log in to access the analyzer."
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
 
 with app.app_context():
     db.create_all()
 
 
+JWT_EXPIRY_HOURS = 24
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        auth_header = request.headers.get("Authorization", "")
+        if auth_header.startswith("Bearer "):
+            token = auth_header.split(" ", 1)[1]
+
+        if not token:
+            return jsonify({"error": "Token is missing"}), 401
+
+        try:
+            payload = jwt.decode(
+                token, app.config["SECRET_KEY"], algorithms=["HS256"]
+            )
+            user = User.query.get(payload["user_id"])
+            if user is None:
+                return jsonify({"error": "User not found"}), 401
+        except jwt.ExpiredSignatureError:
+            return jsonify({"error": "Token has expired"}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({"error": "Invalid token"}), 401
+
+        return f(user, *args, **kwargs)
+
+    return decorated
+
+
+def generate_token(user_id):
+    payload = {
+        "user_id": user_id,
+        "exp": datetime.utcnow() + timedelta(hours=JWT_EXPIRY_HOURS),
+        "iat": datetime.utcnow(),
+    }
+    return jwt.encode(payload, app.config["SECRET_KEY"], algorithm="HS256")
+
+
 def safe_filename(filename):
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    clean = re.sub(r'[^\w.\-]', '', filename)
+    clean = re.sub(r"[^\w.\-]", "", filename)
     return f"{ts}_{clean}"
 
 
 def send_reset_email(to_email, reset_url):
     if not SMTP_USER or not SMTP_PASS:
-        app.logger.warning("SMTP not configured. User=%s Pass_set=%s", SMTP_USER, bool(SMTP_PASS))
+        app.logger.warning(
+            "SMTP not configured. User=%s Pass_set=%s", SMTP_USER, bool(SMTP_PASS)
+        )
         return False
 
     msg = MIMEMultipart("alternative")
@@ -84,7 +117,13 @@ def send_reset_email(to_email, reset_url):
     msg["To"] = to_email
     msg["Subject"] = "Strategic Impact Analyzer — Password Reset"
 
-    text_body = f"You requested a password reset.\n\nClick the link below to set a new password:\n\n{reset_url}\n\nThis link expires in 1 hour.\nIf you did not request this, ignore this email."
+    text_body = (
+        f"You requested a password reset.\n\n"
+        f"Click the link below to set a new password:\n\n"
+        f"{reset_url}\n\n"
+        f"This link expires in 1 hour.\n"
+        f"If you did not request this, ignore this email."
+    )
 
     html_body = f"""
     <div style="font-family:Inter,-apple-system,sans-serif;max-width:480px;margin:0 auto;padding:32px;">
@@ -118,159 +157,141 @@ def send_reset_email(to_email, reset_url):
         return False
 
 
+# ---------------------------------------------------------------------------
+# Routes
+# ---------------------------------------------------------------------------
+
 @app.route("/")
 def landing():
-    if current_user.is_authenticated:
-        return redirect(url_for("dashboard"))
-    return render_template("landing.html")
+    return jsonify({"message": "Strategic Impact Analyzer API", "version": "1.0"})
 
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/api/register", methods=["POST"])
 def register():
-    if current_user.is_authenticated:
-        return redirect(url_for("dashboard"))
+    data = request.get_json(silent=True) or {}
+    username = data.get("username", "").strip()
+    email = data.get("email", "").strip()
+    full_name = data.get("full_name", "").strip()
+    password = data.get("password", "")
+    confirm = data.get("confirm_password", "")
 
-    if request.method == "POST":
-        username = request.form.get("username", "").strip()
-        email = request.form.get("email", "").strip()
-        full_name = request.form.get("full_name", "").strip()
-        password = request.form.get("password", "")
-        confirm = request.form.get("confirm_password", "")
+    errors = []
+    if not username or len(username) < 3:
+        errors.append("Username must be at least 3 characters.")
+    if not re.match(r"^[a-zA-Z0-9_]+$", username):
+        errors.append("Username can only contain letters, numbers, and underscores.")
+    if not email or not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email):
+        errors.append("Please enter a valid email address.")
+    if not password or len(password) < 6:
+        errors.append("Password must be at least 6 characters.")
+    if password != confirm:
+        errors.append("Passwords do not match.")
+    if User.query.filter_by(username=username).first():
+        errors.append("Username already taken.")
+    if User.query.filter_by(email=email).first():
+        errors.append("Email already registered.")
 
-        errors = []
-        if not username or len(username) < 3:
-            errors.append("Username must be at least 3 characters.")
-        if not re.match(r'^[a-zA-Z0-9_]+$', username):
-            errors.append("Username can only contain letters, numbers, and underscores.")
-        if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
-            errors.append("Please enter a valid email address.")
-        if not password or len(password) < 6:
-            errors.append("Password must be at least 6 characters.")
-        if password != confirm:
-            errors.append("Passwords do not match.")
-        if User.query.filter_by(username=username).first():
-            errors.append("Username already taken.")
-        if User.query.filter_by(email=email).first():
-            errors.append("Email already registered.")
+    if errors:
+        return jsonify({"errors": errors}), 400
 
-        if errors:
-            for e in errors:
-                flash(e, "error")
-            return render_template("register.html")
+    user = User(username=username, email=email, full_name=full_name)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
 
-        user = User(username=username, email=email, full_name=full_name)
-        user.set_password(password)
-        db.session.add(user)
+    return jsonify({"message": "Account created successfully"}), 201
+
+
+@app.route("/api/login", methods=["POST"])
+def login():
+    data = request.get_json(silent=True) or {}
+    username = data.get("username", "").strip()
+    password = data.get("password", "")
+
+    user = User.query.filter_by(username=username).first()
+    if user is None or not user.check_password(password):
+        return jsonify({"error": "Invalid username or password"}), 401
+
+    token = generate_token(user.id)
+    return jsonify({
+        "message": "Login successful",
+        "token": token,
+        "user": {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "full_name": user.full_name,
+        },
+    })
+
+
+@app.route("/api/me")
+@token_required
+def me(current_user):
+    return jsonify({
+        "id": current_user.id,
+        "username": current_user.username,
+        "email": current_user.email,
+        "full_name": current_user.full_name,
+        "created_at": current_user.created_at.isoformat() if current_user.created_at else None,
+    })
+
+
+@app.route("/api/forgot-password", methods=["POST"])
+def forgot_password():
+    data = request.get_json(silent=True) or {}
+    email = data.get("email", "").strip().lower()
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        ResetToken.query.filter_by(user_id=user.id, used=False).update({"used": True})
+        reset_token = ResetToken(
+            user_id=user.id,
+            expires_at=datetime.utcnow() + timedelta(hours=1),
+        )
+        db.session.add(reset_token)
         db.session.commit()
 
-        flash("Account created successfully! Please log in.", "success")
-        return redirect(url_for("login"))
+        reset_link = f"{request.host_url}api/reset-password/{reset_token.token}"
+        sent = send_reset_email(email, reset_link)
 
-    return render_template("register.html")
+        if sent:
+            return jsonify({"message": "Password reset link sent to your email"})
+        return jsonify({"error": "Could not send email. Please try again later."}), 500
 
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for("dashboard"))
-
-    if request.method == "POST":
-        username = request.form.get("username", "").strip()
-        password = request.form.get("password", "")
-        remember = request.form.get("remember") == "on"
-
-        user = User.query.filter_by(username=username).first()
-
-        if user is None or not user.check_password(password):
-            flash("Invalid username or password.", "error")
-            return render_template("login.html")
-
-        login_user(user, remember=remember)
-        next_page = request.args.get("next")
-        if next_page and not next_page.startswith("/"):
-            next_page = None
-        flash(f"Welcome back, {user.full_name or user.username}!", "success")
-        return redirect(next_page or url_for("dashboard"))
-
-    return render_template("login.html")
+    return jsonify({"message": "If that email is registered, a reset link has been sent"})
 
 
-@app.route("/forgot-password", methods=["GET", "POST"])
-def forgot_password():
-    if current_user.is_authenticated:
-        return redirect(url_for("dashboard"))
-
-    if request.method == "POST":
-        email = request.form.get("email", "").strip().lower()
-        user = User.query.filter_by(email=email).first()
-
-        if user:
-            ResetToken.query.filter_by(user_id=user.id, used=False).update({"used": True})
-            reset_token = ResetToken(
-                user_id=user.id,
-                expires_at=datetime.utcnow() + timedelta(hours=1),
-            )
-            db.session.add(reset_token)
-            db.session.commit()
-
-            reset_link = url_for("reset_password", token=reset_token.token, _external=True)
-            sent = send_reset_email(email, reset_link)
-            if sent:
-                flash("Password reset link sent to your email.", "success")
-            else:
-                flash("Could not send email. Please try again later.", "error")
-        else:
-            flash("If that email is registered, a reset link has been sent.", "info")
-
-        return redirect(url_for("forgot_password"))
-
-    return render_template("forgot_password.html")
-
-
-@app.route("/reset-password/<token>", methods=["GET", "POST"])
+@app.route("/api/reset-password/<token>", methods=["POST"])
 def reset_password(token):
-    if current_user.is_authenticated:
-        return redirect(url_for("dashboard"))
-
     reset_token = ResetToken.query.filter_by(token=token).first()
     if not reset_token or not reset_token.is_valid():
-        flash("Invalid or expired reset link. Please request a new one.", "error")
-        return redirect(url_for("forgot_password"))
+        return jsonify({"error": "Invalid or expired reset link"}), 400
 
-    if request.method == "POST":
-        password = request.form.get("password", "")
-        confirm = request.form.get("confirm_password", "")
+    data = request.get_json(silent=True) or {}
+    password = data.get("password", "")
+    confirm = data.get("confirm_password", "")
 
-        if len(password) < 6:
-            flash("Password must be at least 6 characters.", "error")
-            return render_template("reset_password.html", token=token)
+    if len(password) < 6:
+        return jsonify({"error": "Password must be at least 6 characters"}), 400
+    if password != confirm:
+        return jsonify({"error": "Passwords do not match"}), 400
 
-        if password != confirm:
-            flash("Passwords do not match.", "error")
-            return render_template("reset_password.html", token=token)
+    user = User.query.get(reset_token.user_id)
+    user.set_password(password)
+    reset_token.used = True
+    db.session.commit()
 
-        user = User.query.get(reset_token.user_id)
-        user.set_password(password)
-        reset_token.used = True
-        db.session.commit()
-
-        flash("Password reset successful! Please sign in.", "success")
-        return redirect(url_for("login"))
-
-    return render_template("reset_password.html", token=token)
+    return jsonify({"message": "Password reset successful"})
 
 
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    flash("You have been logged out.", "info")
-    return redirect(url_for("landing"))
-
-
-@app.route("/dashboard")
-@login_required
-def dashboard():
+@app.route("/api/dashboard")
+@token_required
+def dashboard(current_user):
+    total = AnalysisHistory.query.filter_by(user_id=current_user.id).count()
+    high_risk = AnalysisHistory.query.filter_by(
+        user_id=current_user.id, risk_level="HIGH"
+    ).count()
     recent = (
         AnalysisHistory.query
         .filter_by(user_id=current_user.id)
@@ -278,34 +299,27 @@ def dashboard():
         .limit(5)
         .all()
     )
-    total_analyses = AnalysisHistory.query.filter_by(user_id=current_user.id).count()
-    high_risk_count = AnalysisHistory.query.filter_by(user_id=current_user.id, risk_level="HIGH").count()
-    return render_template(
-        "dashboard.html",
-        recent=recent,
-        total_analyses=total_analyses,
-        high_risk_count=high_risk_count,
-        member_since=current_user.created_at,
-    )
+
+    return jsonify({
+        "total_analyses": total,
+        "high_risk_count": high_risk,
+        "member_since": current_user.created_at.isoformat() if current_user.created_at else None,
+        "recent": [
+            {
+                "id": a.id,
+                "filename": a.filename,
+                "risk_level": a.risk_level,
+                "risk_score": a.risk_score,
+                "created_at": a.created_at.isoformat() if a.created_at else None,
+            }
+            for a in recent
+        ],
+    })
 
 
-@app.route("/history")
-@login_required
-def history():
-    page = request.args.get("page", 1, type=int)
-    per_page = 10
-    pagination = (
-        AnalysisHistory.query
-        .filter_by(user_id=current_user.id)
-        .order_by(AnalysisHistory.created_at.desc())
-        .paginate(page=page, per_page=per_page, error_out=False)
-    )
-    return render_template("history.html", pagination=pagination)
-
-
-@app.route("/analyze", methods=["POST"])
-@login_required
-def analyze():
+@app.route("/api/analyze", methods=["POST"])
+@token_required
+def analyze(current_user):
     if "xmlfile" not in request.files:
         return jsonify({"error": "No file uploaded"}), 400
 
@@ -362,90 +376,138 @@ def analyze():
     })
 
 
-@app.route("/history/<int:analysis_id>")
-@login_required
-def view_analysis(analysis_id):
-    entry = AnalysisHistory.query.get_or_404(analysis_id)
-    if entry.user_id != current_user.id:
-        flash("Access denied.", "error")
-        return redirect(url_for("history"))
-
-    impact = json.loads(entry.impact_json) if entry.impact_json else {}
-    return render_template(
-        "view_analysis.html",
-        entry=entry,
-        impact=impact,
+@app.route("/api/history")
+@token_required
+def history(current_user):
+    page = request.args.get("page", 1, type=int)
+    per_page = 10
+    pagination = (
+        AnalysisHistory.query
+        .filter_by(user_id=current_user.id)
+        .order_by(AnalysisHistory.created_at.desc())
+        .paginate(page=page, per_page=per_page, error_out=False)
     )
 
+    return jsonify({
+        "items": [
+            {
+                "id": a.id,
+                "filename": a.filename,
+                "risk_level": a.risk_level,
+                "risk_score": a.risk_score,
+                "total_components": a.total_components,
+                "effort_days": a.effort_days,
+                "created_at": a.created_at.isoformat() if a.created_at else None,
+            }
+            for a in pagination.items
+        ],
+        "page": pagination.page,
+        "per_page": pagination.per_page,
+        "total": pagination.total,
+        "pages": pagination.pages,
+        "has_next": pagination.has_next,
+        "has_prev": pagination.has_prev,
+    })
 
-@app.route("/history/<int:analysis_id>/delete", methods=["POST"])
-@login_required
-def delete_analysis(analysis_id):
+
+@app.route("/api/history/<int:analysis_id>")
+@token_required
+def view_analysis(current_user, analysis_id):
     entry = AnalysisHistory.query.get_or_404(analysis_id)
     if entry.user_id != current_user.id:
-        flash("Access denied.", "error")
-        return redirect(url_for("history"))
+        return jsonify({"error": "Access denied"}), 403
+
+    impact = json.loads(entry.impact_json) if entry.impact_json else {}
+    return jsonify({
+        "id": entry.id,
+        "filename": entry.filename,
+        "risk_level": entry.risk_level,
+        "risk_score": entry.risk_score,
+        "total_components": entry.total_components,
+        "effort_days": entry.effort_days,
+        "effort_hrs": entry.effort_hrs,
+        "fast_delivery_days": entry.fast_delivery_days,
+        "client_note": entry.client_note,
+        "report_text": entry.report_text,
+        "impact": impact,
+        "created_at": entry.created_at.isoformat() if entry.created_at else None,
+    })
+
+
+@app.route("/api/history/<int:analysis_id>", methods=["DELETE"])
+@token_required
+def delete_analysis(current_user, analysis_id):
+    entry = AnalysisHistory.query.get_or_404(analysis_id)
+    if entry.user_id != current_user.id:
+        return jsonify({"error": "Access denied"}), 403
 
     db.session.delete(entry)
     db.session.commit()
-    flash("Analysis deleted.", "info")
-    return redirect(url_for("history"))
+    return jsonify({"message": "Analysis deleted"})
 
 
-@app.route("/profile", methods=["GET", "POST"])
-@login_required
-def profile():
-    if request.method == "POST":
-        full_name = request.form.get("full_name", "").strip()
-        email = request.form.get("email", "").strip()
-        current_password = request.form.get("current_password", "")
-        new_password = request.form.get("new_password", "")
-
-        if email != current_user.email:
-            existing = User.query.filter_by(email=email).first()
-            if existing:
-                flash("Email already in use.", "error")
-                return render_template("profile.html")
-
-        current_user.full_name = full_name
-        current_user.email = email
-
-        if new_password:
-            if not current_user.check_password(current_password):
-                flash("Current password is incorrect.", "error")
-                return render_template("profile.html")
-            if len(new_password) < 6:
-                flash("New password must be at least 6 characters.", "error")
-                return render_template("profile.html")
-            current_user.set_password(new_password)
-
-        db.session.commit()
-        flash("Profile updated successfully.", "success")
-        return redirect(url_for("profile"))
-
-    return render_template("profile.html")
+@app.route("/api/profile")
+@token_required
+def get_profile(current_user):
+    return jsonify({
+        "id": current_user.id,
+        "username": current_user.username,
+        "email": current_user.email,
+        "full_name": current_user.full_name,
+        "created_at": current_user.created_at.isoformat() if current_user.created_at else None,
+    })
 
 
-@app.route("/download/<path:filename>")
-@login_required
-def download(filename):
-    return send_file(filename, as_attachment=True)
+@app.route("/api/profile", methods=["PUT"])
+@token_required
+def update_profile(current_user):
+    data = request.get_json(silent=True) or {}
+    full_name = data.get("full_name", current_user.full_name)
+    email = data.get("email", current_user.email)
+    current_password = data.get("current_password", "")
+    new_password = data.get("new_password", "")
 
+    if email != current_user.email:
+        if User.query.filter_by(email=email).first():
+            return jsonify({"error": "Email already in use"}), 400
+
+    current_user.full_name = full_name
+    current_user.email = email
+
+    if new_password:
+        if not current_user.check_password(current_password):
+            return jsonify({"error": "Current password is incorrect"}), 400
+        if len(new_password) < 6:
+            return jsonify({"error": "New password must be at least 6 characters"}), 400
+        current_user.set_password(new_password)
+
+    db.session.commit()
+    return jsonify({"message": "Profile updated successfully"})
+
+
+@app.route("/api/logout", methods=["POST"])
+@token_required
+def logout(current_user):
+    return jsonify({"message": "Logged out successfully"})
+
+
+# ---------------------------------------------------------------------------
+# Error handlers
+# ---------------------------------------------------------------------------
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("base.html", error_code=404, error_msg="Page not found"), 404
+    return jsonify({"error": "Not found"}), 404
 
 
 @app.errorhandler(413)
 def too_large(e):
-    flash("File is too large. Maximum size is 16 MB.", "error")
-    return redirect(url_for("dashboard"))
+    return jsonify({"error": "File is too large. Maximum size is 16 MB."}), 413
 
 
 @app.errorhandler(500)
 def server_error(e):
-    return render_template("base.html", error_code=500, error_msg="Internal server error"), 500
+    return jsonify({"error": "Internal server error"}), 500
 
 
 if __name__ == "__main__":

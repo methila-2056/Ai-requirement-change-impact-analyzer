@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-Powered Change Impact Analysis for Software Requirements — Analyze XML configurations, map dependencies, calculate risk scores.">
+  <title>Strategic Impact Analyzer — AI-Powered Change Impact Analysis</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9889;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="nav-brand">
+        <div class="nav-brand-icon"><i class="icon-zap"></i></div>
+        <div class="nav-brand-text">
+          <span class="nav-brand-name">SIA</span>
+          <span class="nav-brand-tag">v2.0</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks"></div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg-effects">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="icon-sparkles"></i>
+        <span>v2.0 — AI-Powered Impact Analysis</span>
+      </div>
+      <h1 class="hero-title">
+        Requirement Change<br>
+        <span class="gradient-text">Impact Analyzer</span>
+      </h1>
+      <p class="hero-description">
+        Upload XML configuration files and instantly discover which components are affected,
+        assess risk levels, and get accurate delivery timelines — powered by intelligent
+        rule-based analysis across <strong>42+ component types</strong>.
+      </p>
+      <div class="hero-actions">
+        <a href="register.html" class="btn btn-primary btn-lg">
+          <i class="icon-rocket"></i> Start Analyzing
+        </a>
+        <a href="login.html" class="btn btn-outline btn-lg">
+          <i class="icon-log-in"></i> Sign In
+        </a>
+      </div>
+      <div class="hero-proof">
+        <span class="hero-proof-text">Open-source &middot; 42+ component rules &middot; Instant analysis</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-badge"><i class="icon-layers"></i> Features</div>
+      <h2 class="section-title">Everything you need for<br><span class="gradient-text">impact analysis</span></h2>
+      <p class="section-subtitle">From XML parsing to effort estimation — a complete pipeline for change impact assessment.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-file-search"></i></div>
+        <h3>Smart XML Parsing</h3>
+        <p>Upload any XML file — ETL mappings, configs, schemas — and get instant component-level analysis with full dependency mapping.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-shield-alert"></i></div>
+        <h3>Risk Scoring Engine</h3>
+        <p>Automated risk classification as HIGH, MEDIUM, or LOW with weighted scoring across 42+ component types and categories.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-timer"></i></div>
+        <h3>Effort Estimation</h3>
+        <p>Accurate delivery timelines with man-hour estimates, working day projections, and fast-track calculations for 2-person teams.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-users"></i></div>
+        <h3>User Authentication</h3>
+        <p>Secure registration, login, and session management with bcrypt password hashing and remember-me support.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-history"></i></div>
+        <h3>Analysis History</h3>
+        <p>Track and revisit all past analyses with full report storage, pagination, and one-click detail views.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="icon-file-text"></i></div>
+        <h3>Professional Reports</h3>
+        <p>Generate formatted text and JSON reports with copy-to-clipboard and download support for stakeholder sharing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <div class="section-badge"><i class="icon-git-branch"></i> Pipeline</div>
+      <h2 class="section-title">How it <span class="gradient-text">works</span></h2>
+      <p class="section-subtitle">An 8-step intelligent pipeline from XML upload to actionable report.</p>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="pipeline-number">01</div>
+        <div class="pipeline-icon"><i class="icon-upload-cloud"></i></div>
+        <h4>Upload XML</h4>
+        <p>Drag &amp; drop or browse to select your XML configuration file.</p>
+      </div>
+      <div class="pipeline-connector"><i class="icon-chevron-right"></i></div>
+      <div class="pipeline-step">
+        <div class="pipeline-number">02</div>
+        <div class="pipeline-icon"><i class="icon-code"></i></div>
+        <h4>Parse XML</h4>
+        <p>xmltodict converts your XML into a structured Python dictionary.</p>
+      </div>
+      <div class="pipeline-connector"><i class="icon-chevron-right"></i></div>
+      <div class="pipeline-step">
+        <div class="pipeline-number">03</div>
+        <div class="pipeline-icon"><i class="icon-search"></i></div>
+        <h4>Flatten &amp; Scan</h4>
+        <p>All keys and values are extracted into a searchable text corpus.</p>
+      </div>
+      <div class="pipeline-connector"><i class="icon-chevron-right"></i></div>
+      <div class="pipeline-step">
+        <div class="pipeline-number">04</div>
+        <div class="pipeline-icon"><i class="icon-cpu"></i></div>
+        <h4>Impact Engine</h4>
+        <p>Regex-based matching against 42 component rules with risk scoring.</p>
+      </div>
+      <div class="pipeline-connector"><i class="icon-chevron-right"></i></div>
+      <div class="pipeline-step">
+        <div class="pipeline-number">05</div>
+        <div class="pipeline-icon"><i class="icon-bar-chart-2"></i></div>
+        <h4>Risk Classify</h4>
+        <p>Aggregate risk scores and classify as HIGH / MEDIUM / LOW.</p>
+      </div>
+      <div class="pipeline-connector"><i class="icon-chevron-right"></i></div>
+      <div class="pipeline-step">
+        <div class="pipeline-number">06</div>
+        <div class="pipeline-icon"><i class="icon-calculator"></i></div>
+        <h4>Estimate Effort</h4>
+        <p>Calculate working days, man-hours, and fast-track delivery.</p>
+      </div>
+      <div class="pipeline-connector"><i class="icon-chevron-right"></i></div>
+      <div class="pipeline-step">
+        <div class="pipeline-number">07</div>
+        <div class="pipeline-icon"><i class="icon-file-plus"></i></div>
+        <h4>Generate Report</h4>
+        <p>Formatted text and JSON reports with client communication notes.</p>
+      </div>
+      <div class="pipeline-connector"><i class="icon-chevron-right"></i></div>
+      <div class="pipeline-step">
+        <div class="pipeline-number">08</div>
+        <div class="pipeline-icon"><i class="icon-database"></i></div>
+        <h4>Store &amp; Track</h4>
+        <p>Results saved to your account for future reference and tracking.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section">
+    <div class="landing-stats">
+      <div class="landing-stat">
+        <div class="landing-stat-icon"><i class="icon-puzzle"></i></div>
+        <div class="landing-stat-value">42+</div>
+        <div class="landing-stat-label">Component Types</div>
+      </div>
+      <div class="landing-stat">
+        <div class="landing-stat-icon"><i class="icon-trending-down"></i></div>
+        <div class="landing-stat-value">93%</div>
+        <div class="landing-stat-label">Time Saved</div>
+      </div>
+      <div class="landing-stat">
+        <div class="landing-stat-icon"><i class="icon-alert-triangle"></i></div>
+        <div class="landing-stat-value">3</div>
+        <div class="landing-stat-label">Risk Levels</div>
+      </div>
+      <div class="landing-stat">
+        <div class="landing-stat-icon"><i class="icon-zap"></i></div>
+        <div class="landing-stat-value">&lt;5s</div>
+        <div class="landing-stat-label">Analysis Time</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-alt">
+    <div class="cta-box">
+      <h2 class="cta-title">Ready to analyze your requirements?</h2>
+      <p class="cta-description">Create a free account and start getting instant impact analysis reports in seconds.</p>
+      <div class="cta-actions">
+        <a href="register.html" class="btn btn-primary btn-lg">
+          <i class="icon-rocket"></i> Create Free Account
+        </a>
+        <a href="https://github.com/methila-2056/Ai-requirement-change-impact-analyzer" target="_blank" class="btn btn-outline btn-lg">
+          <i class="icon-code"></i> View Source
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-brand-icon" style="width:28px;height:28px;font-size:14px;">
+          <i class="icon-zap"></i>
+        </div>
+        <span>SIA</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="https://github.com/methila-2056/Ai-requirement-change-impact-analyzer" target="_blank" rel="noopener">Source Code</a>
+        <a href="register.html">Get Started</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 Strategic Impact Analyzer. Built with precision.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

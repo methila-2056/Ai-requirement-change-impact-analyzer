@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-Powered Change Impact Analysis for Software Requirements — Analyze XML configurations, map dependencies, calculate risk scores.">
+  <title>Dashboard — Strategic Impact Analyzer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9889;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="nav-brand">
+        <div class="nav-brand-icon"><i class="icon-zap"></i></div>
+        <div class="nav-brand-text">
+          <span class="nav-brand-name">SIA</span>
+          <span class="nav-brand-tag">v2.0</span>
+        </div>
+      </a>
+      <div class="nav-links" id="navLinks"></div>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper narrow">
+
+    <div class="dash-header">
+      <div class="dash-header-left">
+        <h1>Analysis Dashboard</h1>
+        <p>Upload an XML file to get instant impact analysis with risk scoring and effort estimation.</p>
+      </div>
+      <div class="dash-header-right">
+        <div class="dash-user-badge">
+          <div class="dash-user-avatar" id="dashUserAvatar">-</div>
+          <div class="dash-user-info">
+            <span class="dash-user-name" id="dashUserName">-</span>
+            <span class="dash-user-role" id="dashUserEmail">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-stats">
+      <div class="dash-stat">
+        <div class="dash-stat-icon blue"><i class="icon-bar-chart-2"></i></div>
+        <div class="dash-stat-info">
+          <div class="dash-stat-value" id="statTotalAnalyses">-</div>
+          <div class="dash-stat-label">Total Analyses</div>
+        </div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-icon red"><i class="icon-alert-triangle"></i></div>
+        <div class="dash-stat-info">
+          <div class="dash-stat-value" id="statHighRisk">-</div>
+          <div class="dash-stat-label">High Risk</div>
+        </div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-icon green"><i class="icon-calendar"></i></div>
+        <div class="dash-stat-info">
+          <div class="dash-stat-value" id="statMemberSince">-</div>
+          <div class="dash-stat-label">Member Since</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="upload-section">
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-icon-wrap">
+          <i class="icon-upload-cloud"></i>
+        </div>
+        <div class="upload-title">Drop your XML file here</div>
+        <div class="upload-sub">
+          <i class="icon-file"></i> Drag &amp; drop or click to browse
+        </div>
+        <div class="upload-formats">.xml files only &middot; Max 16 MB</div>
+        <div class="file-chosen" id="fileChosen">
+          <i class="icon-file-text"></i>
+          <span id="chosenFileName"></span>
+          <button type="button" class="file-chosen-remove" onclick="event.stopPropagation(); resetTool();">
+            <i class="icon-x"></i>
+          </button>
+        </div>
+        <input type="file" id="fileInput" accept=".xml" style="display:none">
+      </div>
+
+      <div class="error-box" id="errorBox"></div>
+
+      <button class="btn btn-primary btn-block btn-lg" id="btnAnalyze" style="margin-top:24px; position:relative; overflow:hidden;" disabled>
+        <i class="icon-zap"></i> Analyze Impact
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" id="loadingDiv">
+      <div class="spinner"></div>
+      <p class="loading-title">Analyzing your XML file...</p>
+      <p class="loading-steps">
+        <span class="loading-step active" id="step1">Parsing XML</span>
+        <i class="icon-chevron-right loading-arrow"></i>
+        <span class="loading-step" id="step2">Scanning Components</span>
+        <i class="icon-chevron-right loading-arrow"></i>
+        <span class="loading-step" id="step3">Generating Report</span>
+      </p>
+    </div>
+
+    <!-- Results -->
+    <div id="results">
+      <div class="divider"></div>
+
+      <div class="results-header">
+        <div class="results-header-left">
+          <div class="results-title">Impact Analysis Report</div>
+          <div class="results-file" id="resultsFileName"></div>
+        </div>
+        <div id="riskBadge"></div>
+      </div>
+
+      <div class="stats-row" id="statsRow"></div>
+
+      <div class="section-title"><i class="icon-layers"></i> Affected Components</div>
+      <div class="components-list" id="componentsList"></div>
+
+      <div class="client-note">
+        <div class="client-note-header">
+          <i class="icon-message-square"></i>
+          <div class="section-title" style="margin-bottom:0;">Client Communication Note</div>
+        </div>
+        <p id="clientNote"></p>
+      </div>
+
+      <div class="report-box">
+        <div class="report-box-header">
+          <span><i class="icon-file-text"></i> impact_report.txt</span>
+          <button class="btn-copy" onclick="copyReport()">
+            <i class="icon-copy"></i> Copy
+          </button>
+        </div>
+        <pre class="report-pre" id="reportPre"></pre>
+      </div>
+
+      <div class="actions-row">
+        <button class="btn btn-outline" onclick="resetTool()">
+          <i class="icon-refresh-cw"></i> Analyze Another File
+        </button>
+        <button class="btn btn-outline" onclick="downloadReport()">
+          <i class="icon-download"></i> Download Report
+        </button>
+      </div>
+    </div>
+
+    <!-- Recent Analyses -->
+    <div class="divider" id="recentDivider" style="display:none;"></div>
+    <div class="card" id="recentCard" style="display:none;">
+      <div class="card-header">
+        <div class="card-title">
+          <i class="icon-clock"></i> Recent Analyses
+        </div>
+        <a href="history.html" class="btn btn-ghost btn-sm">
+          View All <i class="icon-arrow-right"></i>
+        </a>
+      </div>
+      <div class="table-wrap">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>File</th>
+              <th>Risk</th>
+              <th>Score</th>
+              <th>Effort</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="recentTableBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-brand-icon" style="width:28px;height:28px;font-size:14px;">
+          <i class="icon-zap"></i>
+        </div>
+        <span>SIA</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="https://github.com/methila-2056/Ai-requirement-change-impact-analyzer" target="_blank" rel="noopener">Source Code</a>
+        <a href="register.html">Get Started</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 Strategic Impact Analyzer. Built with precision.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    (function() {
+      var token = localStorage.getItem('sia_token');
+      var userStr = localStorage.getItem('sia_user');
+      if (!token || !userStr) {
+        window.location.href = 'login.html';
+        return;
+      }
+      var user = JSON.parse(userStr);
+      var name = user.full_name || user.username || 'User';
+
+      document.getElementById('dashUserAvatar').textContent = name.charAt(0).toUpperCase();
+      document.getElementById('dashUserName').textContent = name;
+      document.getElementById('dashUserEmail').textContent = user.email || '';
+
+      fetch('/api/dashboard', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      }).then(function(res) { return res.json(); }).then(function(data) {
+        if (data.error) {
+          if (data.error === 'Unauthorized') {
+            localStorage.removeItem('sia_token');
+            localStorage.removeItem('sia_user');
+            window.location.href = 'login.html';
+          }
+          return;
+        }
+        document.getElementById('statTotalAnalyses').textContent = data.total_analyses;
+        document.getElementById('statHighRisk').textContent = data.high_risk_count;
+        document.getElementById('statMemberSince').textContent = data.member_since;
+
+        if (data.recent && data.recent.length > 0) {
+          var tbody = document.getElementById('recentTableBody');
+          var html = '';
+          data.recent.forEach(function(entry) {
+            var displayFilename = entry.filename.length > 30
+              ? entry.filename.substring(0, 30) + '...'
+              : entry.filename;
+            html += '<tr>' +
+              '<td class="filename">' + displayFilename + '</td>' +
+              '<td><span class="risk-pill ' + entry.risk_level + '">' + entry.risk_level + '</span></td>' +
+              '<td class="mono">' + entry.risk_score + '</td>' +
+              '<td class="mono">' + entry.effort_days + 'd / ' + entry.effort_hrs + 'h</td>' +
+              '<td class="text-muted">' + entry.created_at + '</td>' +
+            '</tr>';
+          });
+          tbody.innerHTML = html;
+          document.getElementById('recentDivider').style.display = '';
+          document.getElementById('recentCard').style.display = '';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
