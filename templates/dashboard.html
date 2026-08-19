@@ -11,10 +11,10 @@
     </div>
     <div class="dash-header-right">
       <div class="dash-user-badge">
-        <div class="dash-user-avatar">{{ current_user.username[0]|upper }}</div>
+        <div class="dash-user-avatar">{{ (current_user.full_name or current_user.username)[0]|upper }}</div>
         <div class="dash-user-info">
           <span class="dash-user-name">{{ current_user.full_name or current_user.username }}</span>
-          <span class="dash-user-role">Analyst</span>
+          <span class="dash-user-role">{{ current_user.email }}</span>
         </div>
       </div>
     </div>
