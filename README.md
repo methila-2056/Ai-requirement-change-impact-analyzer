@@ -23,7 +23,7 @@
 
   <br>
 
-  [![Live Demo](https://img.shields.io/badge/Live-Demo-5b6ef5?style=for-the-badge&logo=rocket&logoColor=white)](#getting-started)
+  [![Live Demo](https://img.shields.io/badge/Live-Demo-5b6ef5?style=for-the-badge&logo=rocket&logoColor=white)](#deployment)
   [![View Docs](https://img.shields.io/badge/Documentation-22d37e?style=for-the-badge&logo=readthedocs&logoColor=white)](#table-of-contents)
   [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/methila-2056/Ai-requirement-change-impact-analyzer)
 
@@ -83,11 +83,12 @@ XML Upload --> Parse XML --> Flatten Keys --> Keyword Matching --> Risk Scoring 
 | **Intelligent Risk Scoring** | Rule-based engine with 42+ component types and weighted risk classification |
 | **Effort Estimation** | Calculates delivery timelines, man-hours, and fast-track projections for 2-person teams |
 | **Secure Authentication** | User registration and login with bcrypt password hashing and session management |
+| **Forgot Password** | Token-based password reset with Gmail SMTP email delivery |
 | **Analysis History** | Track and revisit all past analyses with paginated history and full report storage |
 | **Professional Reports** | Generate formatted text and JSON reports with copy-to-clipboard and download support |
-| **Modern Dark UI** | Responsive, animated interface with glassmorphism effects and smooth transitions |
+| **Dark & Light Themes** | Toggle between dark and light themes with persistent preference via localStorage |
 | **Client Communication Notes** | Auto-generated advisory text based on detected risk level |
-| **Password Strength Indicator** | Real-time password strength feedback during registration |
+| **Password Strength Indicator** | Real-time password strength feedback during registration and reset |
 | **Mobile Responsive** | Full mobile navigation with slide-out menu and touch-friendly interactions |
 
 ---
@@ -124,16 +125,16 @@ XML Upload --> Parse XML --> Flatten Keys --> Keyword Matching --> Risk Scoring 
 ### Dashboard — Upload Zone
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  ⚡ SIA  v2.0       [Dashboard] [History]  [M ▾]                │
+│  ⚡ SIA  v2.0       [Dashboard] [History] [🌙] [M ▾]            │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  Analysis Dashboard                        ┌─────────────────┐  │
-│  Upload an XML file for instant analysis.  │  M  Methila     │  │
-│                                             │     Analyst     │  │
+│  Upload an XML file for instant analysis.  │  M  Methila M   │  │
+│                                             │  methilashiv@.. │  │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  └─────────────────┘  │
-│  │ 📊 5     │  │ ✅ Active│  │ 🛡 42+   │                      │
-│  │Total     │  │Account   │  │Rules     │                      │
-│  │Analyses  │  │Status    │  │Loaded    │                      │
+│  │ 📊 5     │  │ 🔴 2     │  │ 📅 Aug   │                      │
+│  │Total     │  │High Risk │  │ 2026     │                      │
+│  │Analyses  │  │          │  │          │                      │
 │  └──────────┘  └──────────┘  └──────────┘                      │
 │                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐   │
@@ -180,55 +181,31 @@ XML Upload --> Parse XML --> Flatten Keys --> Keyword Matching --> Risk Scoring 
 │  ⚠️ This change has HIGH risk. Multiple critical components      │
 │  are affected. Regression testing is mandatory before deploy.   │
 │                                                                 │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │ impact_report.txt                          [📋 Copy]    │    │
-│  │ ─────────────────────────────────────────────────────── │    │
-│  │ ======================================================= │    │
-│  │   STRATEGIC REQUIREMENT CHANGE IMPACT ANALYSIS REPORT   │    │
-│  │ ======================================================= │    │
-│  │   Generated     : 2026-08-19 14:30:25                   │    │
-│  │   Source File   : wf_brs_unload.xml                      │    │
-│  │                                                          │    │
-│  │   ┌───────────────────────────────────────────────┐     │    │
-│  │   │  RISK LEVEL     :           HIGH              │     │    │
-│  │   │  RISK SCORE     :            40               │     │    │
-│  │   │  COMPONENTS HIT :            21               │     │    │
-│  │   └───────────────────────────────────────────────┘     │    │
-│  └─────────────────────────────────────────────────────────┘    │
-│                                                                 │
 │  [🔄 Analyze Another]  [⬇ Download Report]                      │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Login & Registration
+### Forgot Password
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│  ┌─────────────────────────────┐   ┌─────────────────────────┐ │
-│  │           ⚡                 │   │        👤+               │ │
-│  │     Welcome back            │   │    Create account        │ │
-│  │  Sign in to access SIA      │   │  Start analyzing in sec │ │
-│  │                             │   │                         │ │
-│  │  👤 Username                │   │  👤 Full Name            │ │
-│  │  ┌───────────────────────┐  │   │  ┌───────────────────┐  │ │
-│  │  │ Enter your username   │  │   │  │ Your full name    │  │ │
-│  │  └───────────────────────┘  │   │  └───────────────────┘  │ │
-│  │                             │   │  📧 Username             │ │
-│  │  🔒 Password                │   │  ┌───────────────────┐  │ │
-│  │  ┌───────────────────┐  👁  │   │  │ Choose username   │  │ │
-│  │  │ ••••••••••        │      │   │  └───────────────────┘  │ │
-│  │  └───────────────────┘      │   │  🔒 Password             │ │
-│  │                             │   │  ┌───────────────────┐  │ │
-│  │  ☑ Remember me    Forgot?   │   │  │ ••••••            │  │ │
-│  │                             │   │  └───────────────────┘  │ │
-│  │      [🔐 Sign In]          │   │  ████░░░░ Weak           │ │
-│  │                             │   │                         │ │
-│  │  ─── New to SIA? ───       │   │     [🚀 Create Account] │ │
-│  │                             │   │                         │ │
-│  │  [👤+ Create an account]   │   │  ── Already have? ──    │ │
-│  └─────────────────────────────┘   │  [🔑 Sign in instead]   │ │
-│                                    └─────────────────────────┘ │
+│  ┌─────────────────────────────┐                               │
+│  │           🔑                 │                               │
+│  │     Forgot password?         │                               │
+│  │  Enter your email to         │                               │
+│  │  generate a reset link       │                               │
+│  │                              │                               │
+│  │  📧 Email                    │                               │
+│  │  ┌───────────────────────┐   │                               │
+│  │  │ you@example.com       │   │                               │
+│  │  └───────────────────────┘   │                               │
+│  │                              │                               │
+│  │      [📨 Generate Link]     │                               │
+│  │                              │                               │
+│  │  ── Remember password? ──   │                               │
+│  │  [🔑 Back to Sign In]       │                               │
+│  └─────────────────────────────┘                               │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -267,6 +244,7 @@ XML Upload --> Parse XML --> Flatten Keys --> Keyword Matching --> Risk Scoring 
 | **Database** | SQLite via Flask-SQLAlchemy | 3.1+ |
 | **Authentication** | Flask-Login + Werkzeug | 0.6+ / 3.0+ |
 | **XML Parsing** | xmltodict | 0.14+ |
+| **Email** | Gmail SMTP (smtplib) | - |
 | **Frontend** | HTML5, CSS3, Vanilla JavaScript | - |
 | **Icons** | Lucide Icons | latest |
 | **Fonts** | Inter, JetBrains Mono | Google Fonts |
@@ -290,7 +268,8 @@ XML Upload --> Parse XML --> Flatten Keys --> Keyword Matching --> Risk Scoring 
 │                        FLASK SERVER                             │
 │  ┌───────────────────────┴──────────────────────────────┐     │
 │  │                    Route Handlers                     │     │
-│  │  /  /login  /register  /dashboard  /analyze  /profile│     │
+│  │  /  /login  /register  /forgot-password  /dashboard  │     │
+│  │  /analyze  /history  /profile  /logout               │     │
 │  └───────────────────────┬──────────────────────────────┘     │
 │                          │                                     │
 │  ┌───────────────────────┴──────────────────────────────┐     │
@@ -305,12 +284,20 @@ XML Upload --> Parse XML --> Flatten Keys --> Keyword Matching --> Risk Scoring 
 │                          │                                     │
 │  ┌───────────────────────┴──────────────────────────────┐     │
 │  │              SQLite Database (SQLAlchemy)              │     │
-│  │    ┌──────────────┐       ┌──────────────────┐       │     │
-│  │    │    Users      │──<───│ AnalysisHistory  │       │     │
-│  │    │  id, username │       │ filename, risk,  │       │     │
-│  │    │  email, hash  │       │ score, effort,   │       │     │
-│  │    └──────────────┘       │ report_text, etc │       │     │
-│  │                           └──────────────────┘       │     │
+│  │    ┌──────────────┐  ┌──────────────┐  ┌──────────┐ │     │
+│  │    │    Users      │  │ AnalysisHx   │  │ResetToken│ │     │
+│  │    │  id, username │  │ filename,    │  │token,exp │ │     │
+│  │    │  email, hash  │  │ risk, score, │  │used      │ │     │
+│  │    └──────────────┘  │ effort, etc  │  └──────────┘ │     │
+│  │                       └──────────────┘               │     │
+│  └───────────────────────────────────────────────────────┘     │
+│                          │                                     │
+│  ┌───────────────────────┴──────────────────────────────┐     │
+│  │              Gmail SMTP (Password Reset)              │     │
+│  │  ┌─────────┐   ┌──────────┐   ┌──────────────────┐  │     │
+│  │  │ Generate│──>│ Send via │──>│ User receives     │  │     │
+│  │  │ Token   │   │ SMTP     │   │ email with link   │  │     │
+│  │  └─────────┘   └──────────┘   └──────────────────┘  │     │
 │  └───────────────────────────────────────────────────────┘     │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -323,8 +310,11 @@ XML Upload --> Parse XML --> Flatten Keys --> Keyword Matching --> Risk Scoring 
 Strategic_Impact_Analyzer/
 │
 ├── app.py                          # Flask application (routes, auth, analysis)
-├── models.py                       # SQLAlchemy models (User, AnalysisHistory)
+├── models.py                       # SQLAlchemy models (User, AnalysisHistory, ResetToken)
 ├── requirements.txt                # Python dependencies
+├── Procfile                        # Render deployment config
+├── render.yaml                     # Render blueprint
+├── .env.example                    # Environment variable template
 ├── .gitignore                      # Git ignore rules
 │
 ├── analyzer/                       # Core analysis engine
@@ -338,6 +328,8 @@ Strategic_Impact_Analyzer/
 │   ├── landing.html                # Public landing/marketing page
 │   ├── login.html                  # User login with password toggle
 │   ├── register.html               # User registration with strength indicator
+│   ├── forgot_password.html        # Forgot password - email input form
+│   ├── reset_password.html         # Reset password - new password form
 │   ├── dashboard.html              # Main analyzer (upload + results)
 │   ├── history.html                # Analysis history with pagination
 │   ├── view_analysis.html          # Individual analysis detail view
@@ -345,7 +337,7 @@ Strategic_Impact_Analyzer/
 │
 ├── static/
 │   ├── css/
-│   │   └── style.css               # Complete application stylesheet (1400+ lines)
+│   │   └── style.css               # Complete application stylesheet (2100+ lines)
 │   └── js/
 │       └── app.js                  # Client-side application logic
 │
@@ -361,6 +353,7 @@ Strategic_Impact_Analyzer/
 
 - **Python 3.10** or higher
 - **pip** (Python package manager)
+- **Gmail account** with App Password (for password reset emails)
 
 ### Installation
 
@@ -393,19 +386,28 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**5. Run the application**
+**5. Configure environment variables**
+
+```bash
+# Copy the example env file
+cp .env.example .env
+
+# Edit .env with your Gmail App Password
+```
+
+**6. Run the application**
 
 ```bash
 python app.py
 ```
 
-**6. Open in browser**
+**7. Open in browser**
 
 ```
 http://127.0.0.1:5000
 ```
 
-**7. Create an account** and start analyzing XML files!
+**8. Create an account** and start analyzing XML files!
 
 ---
 
@@ -469,6 +471,9 @@ Cache Layer, Logging/Audit, Configuration, Parameter/Variable
 | GET | `/` | No | Landing page |
 | GET/POST | `/login` | No | User login |
 | GET/POST | `/register` | No | User registration |
+| GET | `/forgot-password` | No | Forgot password form |
+| POST | `/forgot-password` | No | Generate reset token and send email |
+| GET/POST | `/reset-password/<token>` | No | Reset password with token |
 | GET | `/logout` | Yes | Log out |
 | GET | `/dashboard` | Yes | Main analyzer dashboard |
 | POST | `/analyze` | Yes | Upload and analyze XML file (AJAX) |
@@ -486,25 +491,44 @@ Cache Layer, Logging/Audit, Configuration, Parameter/Variable
 |----------|---------|-------------|
 | `SECRET_KEY` | *(auto-generated)* | Flask session secret key |
 | `FLASK_DEBUG` | `true` | Enable/disable debug mode |
+| `SMTP_HOST` | `smtp.gmail.com` | Gmail SMTP server |
+| `SMTP_PORT` | `587` | SMTP port (TLS) |
+| `SMTP_USER` | - | Your Gmail address |
+| `SMTP_PASS` | - | Gmail App Password (16 chars) |
+| `MAIL_FROM` | *(same as SMTP_USER)* | Sender email address |
 
-> **Important:** Set `SECRET_KEY` to a secure random value in production.
+> **Important:** Set `SECRET_KEY` to a secure random value in production. Never commit `.env` to git.
 
 ---
 
 ## Deployment
 
-### Production Setup
+### Deploy to Render (Free)
+
+1. Push your code to GitHub
+2. Go to [render.com](https://render.com) and sign up
+3. Click **New +** → **Blueprint**
+4. Connect your GitHub repo
+5. Render auto-detects `render.yaml` and sets everything up
+6. Add environment variables in the Render dashboard:
+   - `SMTP_USER` → your Gmail
+   - `SMTP_PASS` → your App Password
+   - `MAIL_FROM` → your Gmail
+7. Deploy — you'll get a live URL
+
+### Production Setup (Manual)
 
 ```bash
 # Set environment variables
 export SECRET_KEY="your-secure-random-key-here"
 export FLASK_DEBUG="false"
+export SMTP_USER="your_email@gmail.com"
+export SMTP_PASS="your_app_password"
 
 # Install with version pinning
 pip install -r requirements.txt
 
 # Run with Gunicorn (recommended)
-pip install gunicorn
 gunicorn -w 4 -b 0.0.0.0:8000 app:app
 ```
 
@@ -517,24 +541,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 5000
-CMD ["python", "app.py"]
-```
-
-### Docker Compose
-
-```yaml
-version: '3.8'
-services:
-  app:
-    build: .
-    ports:
-      - "5000:5000"
-    environment:
-      - SECRET_KEY=your-secure-key-here
-      - FLASK_DEBUG=false
-    volumes:
-      - ./uploads:/app/uploads
-      - ./reports:/app/reports
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 ```
 
 ---
@@ -559,7 +566,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ## Author
 
-**Methila** — [GitHub](https://github.com/methila-2056)
+**Methila M** — [GitHub](https://github.com/methila-2056)
 
 ---
 
