@@ -123,7 +123,7 @@
         return;
       }
 
-      fetch('/api/analysis/' + analysisId, {
+      fetch(getApiBase() + '/api/history/' + analysisId, {
         headers: { 'Authorization': 'Bearer ' + token }
       }).then(function(res) { return res.json(); }).then(function(data) {
         document.getElementById('loadingDiv').classList.remove('show');
@@ -137,7 +137,7 @@
           return;
         }
 
-        var entry = data.entry;
+        var entry = data;
         var impact = data.impact || {};
 
         document.getElementById('analysisFilename').textContent = entry.filename;

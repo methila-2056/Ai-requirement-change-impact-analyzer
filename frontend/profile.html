@@ -143,7 +143,7 @@
         return;
       }
 
-      fetch('/api/profile', {
+      fetch(getApiBase() + '/api/profile', {
         headers: { 'Authorization': 'Bearer ' + token }
       }).then(function(res) { return res.json(); }).then(function(data) {
         if (data.error) {
@@ -154,11 +154,11 @@
           }
           return;
         }
-        var user = data.user;
+        var user = data;
         document.getElementById('full_name').value = user.full_name || '';
         document.getElementById('email').value = user.email || '';
         document.getElementById('profileUsername').textContent = user.username;
-        document.getElementById('profileMemberSince').textContent = user.member_since;
+        document.getElementById('profileMemberSince').textContent = user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '-';
       });
 
       document.getElementById('profileForm').addEventListener('submit', async function(e) {
@@ -181,8 +181,8 @@
             body.current_password = currentPassword;
             body.new_password = newPassword;
           }
-          var res = await fetch('/api/profile', {
-            method: 'POST',
+          var res = await fetch(getApiBase() + '/api/profile', {
+            method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer ' + token
@@ -200,8 +200,8 @@
           document.getElementById('current_password').value = '';
           document.getElementById('new_password').value = '';
 
-          var updatedUser = data.user;
-          if (updatedUser) {
+          var updatedUser = data.user || data;
+          if (updatedUser && updatedUser.username) {
             localStorage.setItem('sia_user', JSON.stringify(updatedUser));
           }
         } catch (err) {

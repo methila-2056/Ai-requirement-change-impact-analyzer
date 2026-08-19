@@ -1,0 +1,9 @@
+{
+  "installCommand": "echo done",
+  "buildCommand": "echo done",
+  "outputDirectory": "frontend",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

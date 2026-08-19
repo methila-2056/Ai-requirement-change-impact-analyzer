@@ -155,25 +155,24 @@
         }
 
         try {
-          var res = await fetch('/api/register', {
+          var res = await fetch(getApiBase() + '/api/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               full_name: fullName,
               username: username,
               email: email,
-              password: password
+              password: password,
+              confirm_password: confirmPassword
             })
           });
           var data = await res.json();
-          if (data.error) {
-            errText.textContent = data.error;
+          if (data.error || (data.errors && data.errors.length)) {
+            errText.textContent = data.error || data.errors.join(' ');
             errBox.style.display = 'flex';
             return;
           }
-          localStorage.setItem('sia_token', data.token);
-          localStorage.setItem('sia_user', JSON.stringify(data.user));
-          window.location.href = 'dashboard.html';
+          window.location.href = 'login.html';
         } catch (err) {
           errText.textContent = 'Network error. Make sure the server is running.';
           errBox.style.display = 'flex';

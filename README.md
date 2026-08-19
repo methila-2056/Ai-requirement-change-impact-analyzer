@@ -23,16 +23,27 @@
 
   <br>
 
-  [![Live Demo](https://img.shields.io/badge/Live-Demo-5b6ef5?style=for-the-badge&logo=rocket&logoColor=white)](#deployment)
-  [![View Docs](https://img.shields.io/badge/Documentation-22d37e?style=for-the-badge&logo=readthedocs&logoColor=white)](#table-of-contents)
+  [![Live Frontend](https://img.shields.io/badge/Live_Frontend_(Vercel)-5b6ef5?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-requirement-change-impact-analyz.vercel.app/)
+  [![Live Backend API](https://img.shields.io/badge/Live_Backend_API_(Render)-22d37e?style=for-the-badge&logo=render&logoColor=white)](https://strategic-impact-analyzer.onrender.com/)
+  [![View Docs](https://img.shields.io/badge/Documentation-a855f7?style=for-the-badge&logo=readthedocs&logoColor=white)](#table-of-contents)
   [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/methila-2056/Ai-requirement-change-impact-analyzer)
 
 </div>
 
 ---
 
+## Live Deployment
+
+| Service | URL | Purpose |
+|---------|-----|---------|
+| **Frontend** | [ai-requirement-change-impact-analyz.vercel.app](https://ai-requirement-change-impact-analyz.vercel.app/) | Static SPA (HTML/CSS/JS) served via Vercel |
+| **Backend API** | [strategic-impact-analyzer.onrender.com](https://strategic-impact-analyzer.onrender.com/) | Flask REST API + SQLite on Render |
+
+---
+
 ## Table of Contents
 
+- [Live Deployment](#live-deployment)
 - [Overview](#overview)
 - [Key Features](#key-features)
 - [Output Screenshots](#output-screenshots)
@@ -242,64 +253,70 @@ XML Upload --> Parse XML --> Flatten Keys --> Keyword Matching --> Risk Scoring 
 | **Backend** | Python | 3.10+ |
 | **Web Framework** | Flask | 3.0+ |
 | **Database** | SQLite via Flask-SQLAlchemy | 3.1+ |
-| **Authentication** | Flask-Login + Werkzeug | 0.6+ / 3.0+ |
+| **Authentication** | PyJWT (HS256) + Werkzeug | 2.8+ / 3.0+ |
 | **XML Parsing** | xmltodict | 0.14+ |
+| **CORS** | flask-cors | 4.0+ |
 | **Email** | Gmail SMTP (smtplib) | - |
 | **Frontend** | HTML5, CSS3, Vanilla JavaScript | - |
 | **Icons** | Lucide Icons | latest |
 | **Fonts** | Inter, JetBrains Mono | Google Fonts |
-| **Architecture** | Server-side rendered (Jinja2) | - |
+| **Architecture** | Decoupled SPA (Vercel) + REST API (Render) | - |
+| **WSGI Server** | Gunicorn | 21+ |
 
 ---
 
 ## Architecture
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                        CLIENT (Browser)                       │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐    │
-│  │ Landing  │  │Dashboard │  │ History  │  │ Profile  │    │
-│  │  Page    │  │  Upload  │  │  Table   │  │ Settings │    │
-│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘    │
-│       │              │              │              │           │
-│       └──────────────┴──────────────┴──────────────┘           │
-│                          │ AJAX / Forms                        │
-├──────────────────────────┼──────────────────────────────────────┤
-│                        FLASK SERVER                             │
-│  ┌───────────────────────┴──────────────────────────────┐     │
-│  │                    Route Handlers                     │     │
-│  │  /  /login  /register  /forgot-password  /dashboard  │     │
-│  │  /analyze  /history  /profile  /logout               │     │
-│  └───────────────────────┬──────────────────────────────┘     │
-│                          │                                     │
-│  ┌───────────────────────┴──────────────────────────────┐     │
-│  │               Analysis Pipeline                       │     │
-│  │                                                       │     │
-│  │  ┌─────────┐   ┌──────────┐   ┌──────────────────┐  │     │
-│  │  │ XML     │──>│ Impact   │──>│ Report           │  │     │
-│  │  │ Parser  │   │ Engine   │   │ Generator        │  │     │
-│  │  │xmltodict│   │42 Rules  │   │ TXT + JSON       │  │     │
-│  │  └─────────┘   └──────────┘   └──────────────────┘  │     │
-│  └───────────────────────────────────────────────────────┘     │
-│                          │                                     │
-│  ┌───────────────────────┴──────────────────────────────┐     │
-│  │              SQLite Database (SQLAlchemy)              │     │
-│  │    ┌──────────────┐  ┌──────────────┐  ┌──────────┐ │     │
-│  │    │    Users      │  │ AnalysisHx   │  │ResetToken│ │     │
-│  │    │  id, username │  │ filename,    │  │token,exp │ │     │
-│  │    │  email, hash  │  │ risk, score, │  │used      │ │     │
-│  │    └──────────────┘  │ effort, etc  │  └──────────┘ │     │
-│  │                       └──────────────┘               │     │
-│  └───────────────────────────────────────────────────────┘     │
-│                          │                                     │
-│  ┌───────────────────────┴──────────────────────────────┐     │
-│  │              Gmail SMTP (Password Reset)              │     │
-│  │  ┌─────────┐   ┌──────────┐   ┌──────────────────┐  │     │
-│  │  │ Generate│──>│ Send via │──>│ User receives     │  │     │
-│  │  │ Token   │   │ SMTP     │   │ email with link   │  │     │
-│  │  └─────────┘   └──────────┘   └──────────────────┘  │     │
-│  └───────────────────────────────────────────────────────┘     │
-└──────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│                    CLIENT (Vercel — Static SPA)                       │
+│                                                                      │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐            │
+│  │ Landing  │  │Dashboard │  │ History  │  │ Profile  │            │
+│  │  Page    │  │  Upload  │  │  Table   │  │ Settings │            │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘            │
+│       │              │              │              │                   │
+│       └──────────────┴──────────────┴──────────────┘                   │
+│                          │ fetch() + JWT Bearer                       │
+│                          ▼                                            │
+│               CORS ──────────────────────────┐                       │
+└──────────────────────────────────────────────┼───────────────────────┘
+                                               │
+                          ┌────────────────────┘
+                          ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│               SERVER (Render — Flask REST API)                        │
+│                                                                      │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │                    Route Handlers                             │   │
+│  │  /  /api/login  /api/register  /api/dashboard  /api/analyze │   │
+│  │  /api/history  /api/profile   /api/forgot-password          │   │
+│  └──────────────────────────────────────────────────────────────┘   │
+│                          │                                           │
+│  ┌───────────────────────┴──────────────────────────────────────┐   │
+│  │               Analysis Pipeline                               │   │
+│  │                                                               │   │
+│  │  ┌─────────┐   ┌──────────┐   ┌──────────────────┐          │   │
+│  │  │ XML     │──>│ Impact   │──>│ Report           │          │   │
+│  │  │ Parser  │   │ Engine   │   │ Generator        │          │   │
+│  │  │xmltodict│   │42 Rules  │   │ TXT + JSON       │          │   │
+│  │  └─────────┘   └──────────┘   └──────────────────┘          │   │
+│  └───────────────────────────────────────────────────────────────┘   │
+│                          │                                           │
+│  ┌───────────────────────┴──────────────────────────────────────┐   │
+│  │              SQLite Database (SQLAlchemy)                      │   │
+│  │    ┌──────────────┐  ┌──────────────┐  ┌──────────┐         │   │
+│  │    │    Users      │  │ AnalysisHx   │  │ResetToken│         │   │
+│  │    │  id, username │  │ filename,    │  │token,exp │         │   │
+│  │    │  email, hash  │  │ risk, score, │  │used      │         │   │
+│  │    └──────────────┘  │ effort, etc  │  └──────────┘         │   │
+│  │                       └──────────────┘                       │   │
+│  └───────────────────────────────────────────────────────────────┘   │
+│                          │                                           │
+│  ┌───────────────────────┴──────────────────────────────────────┐   │
+│  │              Gmail SMTP (Password Reset)                      │   │
+│  └───────────────────────────────────────────────────────────────┘   │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -314,6 +331,7 @@ Strategic_Impact_Analyzer/
 ├── requirements.txt                # Python dependencies
 ├── Procfile                        # Render deployment config
 ├── render.yaml                     # Render blueprint
+├── vercel.json                     # Vercel SPA deployment config (root)
 ├── .env.example                    # Environment variable template
 ├── .gitignore                      # Git ignore rules
 │
@@ -323,7 +341,7 @@ Strategic_Impact_Analyzer/
 │   ├── impact_engine.py            # Risk scoring engine (42 component rules)
 │   └── report_generator.py         # Text + JSON report builder
 │
-├── templates/                      # Jinja2 HTML templates
+├── templates/                      # Jinja2 HTML templates (monolith mode)
 │   ├── base.html                   # Base layout (navbar, footer, flash messages)
 │   ├── landing.html                # Public landing/marketing page
 │   ├── login.html                  # User login with password toggle
@@ -340,6 +358,26 @@ Strategic_Impact_Analyzer/
 │   │   └── style.css               # Complete application stylesheet (2100+ lines)
 │   └── js/
 │       └── app.js                  # Client-side application logic
+│
+├── frontend/                       # Standalone SPA (deployed to Vercel)
+│   ├── vercel.json                 # Vercel SPA rewrite rules
+│   ├── index.html                  # Landing page
+│   ├── login.html                  # Login (SPA)
+│   ├── register.html               # Register (SPA)
+│   ├── forgot-password.html        # Forgot password (SPA)
+│   ├── reset-password.html         # Reset password (SPA)
+│   ├── dashboard.html              # Dashboard (SPA)
+│   ├── history.html                # History (SPA)
+│   ├── view-analysis.html          # View analysis (SPA)
+│   ├── profile.html                # Profile (SPA)
+│   ├── css/
+│   │   └── style.css               # SPA stylesheet
+│   └── js/
+│       └── app.js                  # SPA client-side logic
+│
+├── docs/
+│   ├── PRD.md                      # Product Requirements Document
+│   └── BRD.md                      # Business Requirements Document
 │
 ├── uploads/                        # Stored XML uploads (git-ignored)
 └── reports/                        # Generated reports (git-ignored)
@@ -468,20 +506,20 @@ Cache Layer, Logging/Audit, Configuration, Parameter/Variable
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
-| GET | `/` | No | Landing page |
-| GET/POST | `/login` | No | User login |
-| GET/POST | `/register` | No | User registration |
-| GET | `/forgot-password` | No | Forgot password form |
-| POST | `/forgot-password` | No | Generate reset token and send email |
-| GET/POST | `/reset-password/<token>` | No | Reset password with token |
-| GET | `/logout` | Yes | Log out |
-| GET | `/dashboard` | Yes | Main analyzer dashboard |
-| POST | `/analyze` | Yes | Upload and analyze XML file (AJAX) |
-| GET | `/history` | Yes | View analysis history (paginated) |
-| GET | `/history/<id>` | Yes | View specific analysis detail |
-| POST | `/history/<id>/delete` | Yes | Delete an analysis |
-| GET/POST | `/profile` | Yes | Profile settings |
-| GET | `/download/<path>` | Yes | Download report file |
+| `GET` | `/` | No | API root (health check) |
+| `POST` | `/api/register` | No | Create new user account |
+| `POST` | `/api/login` | No | Authenticate and get JWT token |
+| `GET` | `/api/me` | Yes | Get current user info |
+| `POST` | `/api/forgot-password` | No | Generate password reset token |
+| `POST` | `/api/reset-password/<token>` | No | Reset password with token |
+| `GET` | `/api/dashboard` | Yes | Dashboard stats + recent analyses |
+| `POST` | `/api/analyze` | Yes | Upload and analyze XML file |
+| `GET` | `/api/history` | Yes | Paginated analysis history |
+| `GET` | `/api/history/<id>` | Yes | View specific analysis detail |
+| `DELETE` | `/api/history/<id>` | Yes | Delete an analysis |
+| `GET` | `/api/profile` | Yes | Get user profile |
+| `PUT` | `/api/profile` | Yes | Update user profile |
+| `POST` | `/api/logout` | Yes | Invalidate session |
 
 ---
 
@@ -489,7 +527,7 @@ Cache Layer, Logging/Audit, Configuration, Parameter/Variable
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `SECRET_KEY` | *(auto-generated)* | Flask session secret key |
+| `SECRET_KEY` | *(auto-generated)* | Flask session / JWT secret key |
 | `FLASK_DEBUG` | `true` | Enable/disable debug mode |
 | `SMTP_HOST` | `smtp.gmail.com` | Gmail SMTP server |
 | `SMTP_PORT` | `587` | SMTP port (TLS) |
@@ -503,7 +541,14 @@ Cache Layer, Logging/Audit, Configuration, Parameter/Variable
 
 ## Deployment
 
-### Deploy to Render (Free)
+### Live Deployment
+
+| Service | URL | Platform |
+|---------|-----|----------|
+| **Frontend (SPA)** | [ai-requirement-change-impact-analyz.vercel.app](https://ai-requirement-change-impact-analyz.vercel.app/) | Vercel |
+| **Backend (API)** | [strategic-impact-analyzer.onrender.com](https://strategic-impact-analyzer.onrender.com/) | Render |
+
+### Deploy Backend to Render (Free)
 
 1. Push your code to GitHub
 2. Go to [render.com](https://render.com) and sign up
@@ -515,6 +560,15 @@ Cache Layer, Logging/Audit, Configuration, Parameter/Variable
    - `SMTP_PASS` → your App Password
    - `MAIL_FROM` → your Gmail
 7. Deploy — you'll get a live URL
+
+### Deploy Frontend to Vercel (Free)
+
+1. Go to [vercel.com](https://vercel.com) and sign up
+2. Click **Add New...** → **Project**
+3. Import your GitHub repo
+4. Set **Root Directory** to `frontend`
+5. Deploy — Vercel serves the static SPA files
+6. The SPA automatically connects to the Render backend via `getApiBase()`
 
 ### Production Setup (Manual)
 

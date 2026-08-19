@@ -27,7 +27,7 @@ from analyzer.report_generator import generate_report, save_report, save_json_re
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
@@ -310,6 +310,10 @@ def dashboard(current_user):
                 "filename": a.filename,
                 "risk_level": a.risk_level,
                 "risk_score": a.risk_score,
+                "effort_days": a.effort_days,
+                "effort_hrs": a.effort_hrs,
+                "total_components": a.total_components,
+                "fast_delivery_days": a.fast_delivery_days,
                 "created_at": a.created_at.isoformat() if a.created_at else None,
             }
             for a in recent
@@ -397,6 +401,7 @@ def history(current_user):
                 "risk_score": a.risk_score,
                 "total_components": a.total_components,
                 "effort_days": a.effort_days,
+                "effort_hrs": a.effort_hrs,
                 "created_at": a.created_at.isoformat() if a.created_at else None,
             }
             for a in pagination.items
