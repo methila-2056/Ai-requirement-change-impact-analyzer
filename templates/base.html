@@ -38,13 +38,17 @@
             <span>History</span>
           </a>
 
+          <div class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <i class="icon-sun"></i>
+          </div>
+
           <div class="nav-dropdown">
-            <div class="nav-avatar" title="{{ current_user.username }}">
-              {{ current_user.username[0]|upper }}
+            <div class="nav-avatar" title="{{ current_user.full_name or current_user.username }}">
+              {{ (current_user.full_name or current_user.username)[0]|upper }}
             </div>
             <div class="nav-dropdown-menu">
               <div class="dropdown-user-info">
-                <div class="dropdown-avatar">{{ current_user.username[0]|upper }}</div>
+                <div class="dropdown-avatar">{{ (current_user.full_name or current_user.username)[0]|upper }}</div>
                 <div>
                   <div class="dropdown-name">{{ current_user.full_name or current_user.username }}</div>
                   <div class="dropdown-email">{{ current_user.email }}</div>
@@ -64,6 +68,9 @@
             </div>
           </div>
         {% else %}
+          <div class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <i class="icon-sun"></i>
+          </div>
           <a href="{{ url_for('login') }}" class="nav-link">Sign In</a>
           <a href="{{ url_for('register') }}" class="btn btn-primary btn-sm">
             <i class="icon-rocket"></i> Get Started

@@ -151,10 +151,13 @@ def dashboard():
         .all()
     )
     total_analyses = AnalysisHistory.query.filter_by(user_id=current_user.id).count()
+    high_risk_count = AnalysisHistory.query.filter_by(user_id=current_user.id, risk_level="HIGH").count()
     return render_template(
         "dashboard.html",
         recent=recent,
         total_analyses=total_analyses,
+        high_risk_count=high_risk_count,
+        member_since=current_user.created_at,
     )
 
 

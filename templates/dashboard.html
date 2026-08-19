@@ -29,17 +29,17 @@
       </div>
     </div>
     <div class="dash-stat">
-      <div class="dash-stat-icon green"><i class="icon-check-circle"></i></div>
+      <div class="dash-stat-icon red"><i class="icon-alert-triangle"></i></div>
       <div class="dash-stat-info">
-        <div class="dash-stat-value">Active</div>
-        <div class="dash-stat-label">Account Status</div>
+        <div class="dash-stat-value">{{ high_risk_count }}</div>
+        <div class="dash-stat-label">High Risk</div>
       </div>
     </div>
     <div class="dash-stat">
-      <div class="dash-stat-icon purple"><i class="icon-shield"></i></div>
+      <div class="dash-stat-icon green"><i class="icon-calendar"></i></div>
       <div class="dash-stat-info">
-        <div class="dash-stat-value">42+</div>
-        <div class="dash-stat-label">Rules Loaded</div>
+        <div class="dash-stat-value">{{ member_since.strftime('%b %Y') }}</div>
+        <div class="dash-stat-label">Member Since</div>
       </div>
     </div>
   </div>

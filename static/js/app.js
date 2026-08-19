@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initDropdowns();
   initMobileNav();
   initNavbarScroll();
+  initThemeToggle();
 
   const uploadZone = document.getElementById("uploadZone");
   if (uploadZone) initUploadZone();
@@ -128,6 +129,24 @@ function createOverlay() {
   overlay.id = "mobileOverlay";
   document.body.appendChild(overlay);
   return overlay;
+}
+
+/* ===== Theme Toggle ===== */
+function initThemeToggle() {
+  const toggle = document.getElementById("themeToggle");
+  if (!toggle) return;
+
+  const saved = localStorage.getItem("theme") || "dark";
+  if (saved === "light") {
+    document.body.classList.add("light");
+    toggle.innerHTML = '<i class="icon-moon"></i>';
+  }
+
+  toggle.addEventListener("click", () => {
+    const isLight = document.body.classList.toggle("light");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+    toggle.innerHTML = isLight ? '<i class="icon-moon"></i>' : '<i class="icon-sun"></i>';
+  });
 }
 
 /* ===== Navbar Scroll Effect ===== */
